@@ -1,5 +1,5 @@
 # CS3330 Object Oriented Final Project - Group B
-CS3330 Homework 4. This Java program TBD. 
+CS3330 Final Project. This Java program TBD. 
 
 ## Getting Started
 ### Dependencies
