@@ -3,7 +3,7 @@ package edu.mu.NorthEastAirlines;
 public class PlaneObject {
 
 	private int numberOfSeats;
-	private String model;
+	private PlaneType model;
 	
 	public int getNumberOfSeats() {
 		return numberOfSeats;
@@ -11,10 +11,10 @@ public class PlaneObject {
 	public void setNumberOfSeats(int numberOfSeats) {
 		this.numberOfSeats = numberOfSeats;
 	}
-	public String getModel() {
+	public PlaneType getModel() {
 		return model;
 	}
-	public void setModel(String model) {
+	public void setModel(PlaneType model) {
 		this.model = model;
 	}
 }
