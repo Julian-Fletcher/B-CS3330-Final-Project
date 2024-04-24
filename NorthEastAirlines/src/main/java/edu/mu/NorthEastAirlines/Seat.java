@@ -5,6 +5,11 @@ public class Seat {
 	private SeatType seatType;
 	private boolean available;
 	
+	public Seat(int number, SeatType type) {
+		this.seatNumber = number;
+		this.seatType = type;
+		this.available = true;
+	}
 	public int getSeatNumber() {
 		return seatNumber;
 	}
