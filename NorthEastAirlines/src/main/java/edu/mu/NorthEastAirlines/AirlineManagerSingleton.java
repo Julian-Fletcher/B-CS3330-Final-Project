@@ -16,8 +16,16 @@ public class AirlineManagerSingleton {
 	public PlaneObject generatePlane() {
 		PlaneObject newplane = new PlaneObject();
 		
-		Random ran = new Random();
-		System.out.println(ran);
+	    Random random = new Random();
+	    int nseats = random.nextInt(150 - 50) + 50;
+	    
+	    for(int i=0;i<nseats;i++) {
+	    	
+	    	Seat seat = new Seat(i, SeatType.values()[random.nextInt(2)]);
+	    	newplane.addSeat(seat);
+	    	
+	    }
+		System.out.println(newplane.getComfortSeats().toString());
 		return new PlaneObject();
 	}
 	
