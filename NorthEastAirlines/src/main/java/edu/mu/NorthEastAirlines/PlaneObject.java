@@ -10,6 +10,7 @@ public class PlaneObject {
 	
 	public PlaneObject() {
 		this.seats = new ArrayList<Seat>();
+
 	}
 	
 	public ArrayList<Seat> getEconomySeats() {
