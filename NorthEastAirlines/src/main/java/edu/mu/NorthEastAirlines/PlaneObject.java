@@ -7,6 +7,11 @@ public class PlaneObject {
 	private ArrayList<Seat> seats;
 	private PlaneType model;
 	
+	
+	public PlaneObject() {
+		this.seats = new ArrayList<Seat>();
+	}
+	
 	public ArrayList<Seat> getEconomySeats() {
 		ArrayList<Seat> narrowseats = new ArrayList<Seat>();
 		for(Seat seat : this.seats) {
