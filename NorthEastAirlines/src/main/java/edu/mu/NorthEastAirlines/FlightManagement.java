@@ -1,16 +1,13 @@
 package edu.mu.NorthEastAirlines;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Iterator;
 import java.util.Random;
 
 public class FlightManagement 
 {
-	public void generateRandomFlights()
+	public Flight generateRandomFlights()
 	{
-		Flight flight = new Flight();
 		Airport arriveAirport = new Airport();
 		Airport departAirport = new Airport();
 		LocalDateTime departTime;
@@ -25,6 +22,17 @@ public class FlightManagement
 			departLocal = AirportLocations.getAirportLocations(randomAirportLocation());
 		}
 		
+		departTime = randomLocalDateTime();
+		arriveTime = randomLocalDateTime();
+		LocalDateTime tempDateTime = null;
+		
+		if(departTime.isAfter(arriveTime))
+		{
+			tempDateTime = arriveTime;
+			arriveTime = departTime;
+			departTime = tempDateTime;
+		}
+		
 		arriveAirport.airportCode = randomAirportCode();
 		arriveAirport.city = arriveLocal.toString();
 		departAirport.airportCode = randomAirportCode();
@@ -32,6 +40,8 @@ public class FlightManagement
 		flightNumber = randomFlightNumber();
 		plane.setModel(PlaneType.gePlaneType(randomPlaneType()));
 		
+		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, null, flightNumber, plane);
+		return newFlight;
 	}
 	
 	public String randomAirportCode()
@@ -66,7 +76,7 @@ public class FlightManagement
 		return random.nextInt(3);
 	}
 	
-	public LocalDateTime randomArrivaLocalDateTime()
+	public LocalDateTime randomLocalDateTime()
 	{
 		 Random random = new Random();
 	     int year1 = random.nextInt(2025 - 2000) + 2000;
@@ -76,21 +86,7 @@ public class FlightManagement
 	     int hour1 = random.nextInt(24);
 	     int minute1 = random.nextInt(60);
 	     int second1 = random.nextInt(60);
-	     LocalDateTime arrivaLocalDateTime = LocalDateTime.of(year1, month1, day1, hour1, minute1, second1);
-	     return arrivaLocalDateTime;
-	}
-	
-	public LocalDateTime randomDeparLocalDateTime()
-	{
-		Random random = new Random();
-	     int year1 = random.nextInt(2025 - 2000) + 2000;
-	     int month1 = random.nextInt(12) + 1;
-	     Month monthEnum1 = Month.of(month1);
-	     int day1 = random.nextInt(monthEnum1.length(year1 % 4 == 0)) + 1;
-	     int hour1 = random.nextInt(24);
-	     int minute1 = random.nextInt(60);
-	     int second1 = random.nextInt(60);
-	     LocalDateTime deparLocalDateTime = LocalDateTime.of(year1, month1, day1, hour1, minute1, second1);
-	     return deparLocalDateTime;
+	     LocalDateTime localDateTime = LocalDateTime.of(year1, month1, day1, hour1, minute1, second1);
+	     return localDateTime;
 	}
 }
