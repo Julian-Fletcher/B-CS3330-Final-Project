@@ -10,12 +10,11 @@ import flights.PlaneFactory;
 import flights.PlaneObject;
 import accounts.UserAccounts;
 import flights.PlaneType;
-<<<<<<< Updated upstream
+
 import seatSelection.Seat;
 import seatSelection.SeatType;
 
-=======
->>>>>>> Stashed changes
+
 
 public class AirlineManagerSingleton {
 	private String adminPassword;
@@ -30,10 +29,9 @@ public class AirlineManagerSingleton {
 	// Needs to instanticate an admin account
 	
 
-	
-<<<<<<< Updated upstream
+
 	/* *** User Account Management Begins Here *** */
-=======
+
 	// Test
 	public Flight generateRandomFlights()
 	{
@@ -74,7 +72,7 @@ public class AirlineManagerSingleton {
 		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, flightNumber, plane);
 		return newFlight;
 	}
->>>>>>> Stashed changes
+
 	
 	public String randomAirportCode()
 	{
@@ -124,7 +122,7 @@ public class AirlineManagerSingleton {
 	
 	/* Account creation method */
 	public UserAccounts createAccount() {
-		
+	
 	}
 	
 	/* Method to log users in, will set login status to true if 

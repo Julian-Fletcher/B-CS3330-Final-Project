@@ -3,8 +3,8 @@ package flights;
 import java.util.Random;
 
 import flights.PlaneObject;
-import flights.Seat;
-
+import seatSelection.Seat;
+import seatSelection.SeatType;
 public class PlaneFactory {
 
 	public PlaneObject generaterRandomPlane() {
@@ -19,10 +19,14 @@ public class PlaneFactory {
 	    for(int i=0;i<nseats;i++) {
 	    	
 	    	Seat seat = new Seat(i, SeatType.values()[random.nextInt(3)]);
+	    	if(random.nextInt(3) == 1) {
+	    		seat.setAvailable(false);
+	    	}
+	    	
 	    	newplane.addSeat(seat);
 	    	
 	    }
 	    
-		return new PlaneObject();
+		return newplane;
 	}
 }

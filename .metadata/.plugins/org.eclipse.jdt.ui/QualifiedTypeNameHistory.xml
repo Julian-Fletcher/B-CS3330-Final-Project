@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="flights.AirportLocations"/>
+    <fullyQualifiedTypeName name="accounts.UserAccounts"/>
+    <fullyQualifiedTypeName name="flights.PlaneObject"/>
+    <fullyQualifiedTypeName name="flights.PlaneFactory"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="flights.SeatType"/>
+    <fullyQualifiedTypeName name="seatSelection.Seat"/>
+    <fullyQualifiedTypeName name="seatSelection.SeatType"/>
+</qualifiedTypeNameHistroy>

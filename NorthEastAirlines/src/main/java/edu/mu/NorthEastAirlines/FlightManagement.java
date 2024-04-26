@@ -45,7 +45,7 @@ public class FlightManagement
 		flightNumber = randomFlightNumber();
 		plane.setModel(PlaneType.gePlaneType(randomPlaneType()));
 		
-		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, null, flightNumber, plane);
+		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, flightNumber, plane);
 		return newFlight;
 	}
 	

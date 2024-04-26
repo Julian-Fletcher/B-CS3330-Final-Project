@@ -4,14 +4,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import seatSelection.SeatType;
+import seatSelection.Seat;
 import flights.Airport;
 import flights.PlaneObject;
-<<<<<<< Updated upstream
-import seatSelection.Seat;
-=======
-import flights.Seat;
-import flights.SeatType;
->>>>>>> Stashed changes
+import flights.PlaneType;
 
 public class Flight {
 	Airport departureLocation;
@@ -55,9 +52,15 @@ public class Flight {
 	public void setArrivalTime(LocalDateTime arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
-//	public ArrayList<Seat> getAvailableSeats(SeatType type) {
-//		return planeType.getAvailableSeats(type);
-//	}
+	public ArrayList<Seat> getAvailableSeats(SeatType type) {
+		System.out.println("CALLED");
+		return planeType.getAvailableSeats(type);
+	}
+	
+	public ArrayList<Seat> getAllSeats(SeatType type) {
+		System.out.println("CALLED");
+		return planeType.getAllSeats(type);
+	}
 
 	public int getFlightNumber() {
 		return flightNumber;
