@@ -2,6 +2,9 @@ package flights;
 
 import java.util.ArrayList;
 
+import seatSelection.Seat;
+import seatSelection.SeatType;
+
 public class PlaneObject {
 
 	private ArrayList<Seat> seats;

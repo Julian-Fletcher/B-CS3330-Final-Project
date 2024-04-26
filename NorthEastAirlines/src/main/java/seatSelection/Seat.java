@@ -1,4 +1,4 @@
-package flights;
+package seatSelection;
 
 public class Seat {
 	private int seatNumber;

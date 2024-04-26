@@ -5,7 +5,7 @@ import java.util.List;
 
 import flights.Airport;
 import flights.PlaneObject;
-import flights.Seat;
+import seatSelection.Seat;
 
 public class Flight {
 	Airport departureLocation;
