@@ -3,6 +3,10 @@ package edu.mu.NorthEastAirlines;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import flights.Airport;
+import flights.PlaneObject;
+import flights.Seat;
+
 public class Flight {
 	Airport departureLocation;
 	Airport arrivalLocation;

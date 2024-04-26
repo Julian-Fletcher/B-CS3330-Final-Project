@@ -1,4 +1,4 @@
-package edu.mu.NorthEastAirlines;
+package flights;
 
 public enum SeatType {
 	FIRST_CLASS,

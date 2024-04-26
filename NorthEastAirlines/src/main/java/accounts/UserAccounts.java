@@ -1,6 +1,8 @@
-package edu.mu.NorthEastAirlines;
+package accounts;
 
 import java.util.List;
+
+import edu.mu.NorthEastAirlines.Flight;
 
 public class UserAccounts 
 {

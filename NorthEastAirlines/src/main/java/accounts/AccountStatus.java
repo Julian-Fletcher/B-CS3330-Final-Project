@@ -1,4 +1,4 @@
-package edu.mu.NorthEastAirlines;
+package accounts;
 
 public enum AccountStatus {
 	EMERALD,

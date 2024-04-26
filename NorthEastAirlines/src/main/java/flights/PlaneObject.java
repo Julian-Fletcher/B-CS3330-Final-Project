@@ -1,4 +1,4 @@
-package edu.mu.NorthEastAirlines;
+package flights;
 
 import java.util.ArrayList;
 

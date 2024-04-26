@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Random;
 
+import flights.Airport;
+import flights.AirportLocations;
+import flights.PlaneObject;
+import flights.PlaneType;
+
 public class FlightManagement 
 {
 	public Flight generateRandomFlights()

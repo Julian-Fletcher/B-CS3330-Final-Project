@@ -3,6 +3,12 @@ package edu.mu.NorthEastAirlines;
 import java.util.List;
 import java.util.Random;
 
+import accounts.UserAccounts;
+import flights.PlaneObject;
+import flights.PlaneType;
+import flights.Seat;
+import flights.SeatType;
+
 
 public class AirlineManagerSingleton {
 	String adminPassword;

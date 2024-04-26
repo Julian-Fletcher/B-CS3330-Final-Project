@@ -1,4 +1,4 @@
-package edu.mu.NorthEastAirlines;
+package flights;
 
 public enum PlaneType {
 	LARGE_PLANE(0),
