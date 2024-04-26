@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class AirlineManagerSingleton {
 	String adminPassword;
-	List<Account> allAccounts;
+	List<UserAccounts> allAccounts;
 	List<Flight> allFlights;
 	
 	public AirlineManagerSingleton() {
