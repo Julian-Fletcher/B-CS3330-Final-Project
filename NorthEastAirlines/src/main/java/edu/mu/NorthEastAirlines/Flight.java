@@ -1,29 +1,33 @@
 package edu.mu.NorthEastAirlines;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import flights.Airport;
 import flights.PlaneObject;
+<<<<<<< Updated upstream
 import seatSelection.Seat;
+=======
+import flights.Seat;
+import flights.SeatType;
+>>>>>>> Stashed changes
 
 public class Flight {
 	Airport departureLocation;
 	Airport arrivalLocation;
 	LocalDateTime departureTime;
 	LocalDateTime arrivalTime;
-	List<Seat> availableSeats;
 	int flightNumber;
 	PlaneObject planeType;
 	
 	public Flight(Airport departureLocation, Airport arrivalLocation, LocalDateTime departureTime,
-			LocalDateTime arrivalTime, List<Seat> availableSeats, int flightNumber, PlaneObject planeType) {
+			LocalDateTime arrivalTime, int flightNumber, PlaneObject planeType) {
 		super();
 		this.departureLocation = departureLocation;
 		this.arrivalLocation = arrivalLocation;
 		this.departureTime = departureTime;
 		this.arrivalTime = arrivalTime;
-		this.availableSeats = availableSeats;
 		this.flightNumber = flightNumber;
 		this.planeType = planeType;
 	}
@@ -51,12 +55,10 @@ public class Flight {
 	public void setArrivalTime(LocalDateTime arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
-	public List<Seat> getAvailableSeats() {
-		return availableSeats;
-	}
-	public void setAvailableSeats(List<Seat> availableSeats) {
-		this.availableSeats = availableSeats;
-	}
+//	public ArrayList<Seat> getAvailableSeats(SeatType type) {
+//		return planeType.getAvailableSeats(type);
+//	}
+
 	public int getFlightNumber() {
 		return flightNumber;
 	}
