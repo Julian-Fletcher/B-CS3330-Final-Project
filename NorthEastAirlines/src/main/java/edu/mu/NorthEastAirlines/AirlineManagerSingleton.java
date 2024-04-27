@@ -6,12 +6,7 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
-import java.util.Set;
-
-import javax.crypto.SecretKeyFactory;
 
 import flights.Airport;
 import flights.AirportLocations;
@@ -19,11 +14,10 @@ import flights.PlaneFactory;
 import flights.PlaneObject;
 import accounts.AccountStatus;
 import accounts.UserAccounts;
-import exceptions.NoSuchAccountException;
-import exceptions.UsernameTakenException;
 import flights.PlaneType;
 
 import seatSelection.Seat;
+import seatSelection.SeatSelectionStrategy;
 import seatSelection.SeatType;
 
 
@@ -36,7 +30,7 @@ public class AirlineManagerSingleton {
 	private int accountIndex;
 	
 	private static AirlineManagerSingleton instance = null;		// Only one!
-
+	private SeatSelectionStrategy strategy;	// SeatSelectionStrategy
 	
 	
 //	public AirlineManagerSingleton() {
@@ -51,7 +45,6 @@ public class AirlineManagerSingleton {
 			instance.accountIndex = 0;
 			instance.allAccounts = new ArrayList<UserAccounts>();
 			// FLIGHT LIST NEED INIT HERE
-			
 			
 			instance.isAdminLoggedIn = false;
 			
@@ -164,11 +157,10 @@ public class AirlineManagerSingleton {
 		return true;
 	}
 	
-	/* *** User Account Management Begins Here *** */
+	/* *************** ACCOUNT MANAGEMENT METHODS BEGIN HERE ***************  */
 	
 	
 	/* Account creation method */	
-	// Needs to throw exception?
 	public UserAccounts createAccount(String username, String password, String firstName, String lastName) {
 		// Check if the username is taken already
 		if(this.locateByUsername(username) != null) {
@@ -278,23 +270,64 @@ public class AirlineManagerSingleton {
 	}
 	
 	
-	/* Allows a user to view their acccount information */
-	public void viewAccountInformation(String username) {
-		// toString 
+	/* Allows a user to view their account information */
+	public boolean viewAccountInformation(String username) {
+		UserAccounts account = this.locateByUsername(username);
+		if(account == null) {
+			return false;
+		}
+		
+		// Get account information as variables
+		String usr = account.getUsername();
+		String firstName = account.getFirstName();
+		String lastName = account.getLastName();
+		int acctID = account.getId();
+		AccountStatus memberLevel = account.getMembershipLevel();
+		
+		// Print it out!
+		System.out.println("Username" + usr + "Name: " + firstName + lastName + "AccountID: " + acctID + "Membership Level: " + memberLevel + "Reserved Flights: ");
+		return true;
+		
 	}
 	
 	/* User can view their flights */
-	public boolean listBookedFlights(String username) {
-		// Loop through user flight list and print 
-		return false;
+	public boolean listBookedFlights(String username) { 
+		
+		// Get account
+		UserAccounts account = this.locateByUsername(username);
+		if(account == null) {
+			return false;
+		}
+		
+		// Print the users booked flights
+		ArrayList<Flight> flights = (ArrayList<Flight>)account.getBookedFlights();
+		for(Flight flight : flights) {
+			System.out.println(flight.toString());
+		}
+		return true;
 	}
 	
 	// User can delete their accouont
 	public boolean deleteAccount(String username, String password) {
 		// Logout & delete from acct list
 		// Probrably delete flight reservations as well
-		return false;
+		// Will be done afte flight booking is figured out
 	}
 	
-	/* SEAT SELECTION STRATEGY HERE (later)!*/
+	/* *************** ACCOUNT MANAGEMENT METHODS END HERE ***************  */
+	
+	
+	
+	/* *************** SEAT SELECTION METHOD ***************  */
+	
+	// Sets seat selection strategy 
+	public void setSeatSelectionStrategy(SeatSelectionStrategy strategy) {
+		this.strategy = strategy;
+	}
+	
+	/* *************** END OF SEAT SELECTION METHOD ***************  */
+	
+	
+	/* *************** FLIGHT METEHODS HERE ***************  */
+	
 }

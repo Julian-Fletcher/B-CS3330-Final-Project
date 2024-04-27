@@ -1,14 +1,25 @@
 package seatSelection;
 
+import java.util.ArrayList;
+
 import accounts.AccountStatus;
 import edu.mu.NorthEastAirlines.Flight;
 
 public class IronSeatSelection implements SeatSelectionStrategy{
 
 	@Override
-	public void viewAvailableSeats(Flight flight) {
-		// TODO Auto-generated method stub
-		
+	public boolean viewAvailableSeats(Flight flight) {
+		// Get economy seats
+		ArrayList<Seat> availableSeats = flight.getAvailableSeats(SeatType.ECONOMY);
+
+		if(availableSeats.isEmpty()) {
+			return false;
+		}
+		// Print seat information
+		for(Seat seat : availableSeats) {
+			System.out.println(seat.getSeatType() + " Seat Number: " + seat.getSeatNumber());
+		}
+		return true;
 	}
 
 	@Override

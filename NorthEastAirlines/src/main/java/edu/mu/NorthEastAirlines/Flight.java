@@ -74,4 +74,11 @@ public class Flight {
 	public void setPlaneType(PlaneObject planeType) {
 		this.planeType = planeType;
 	}
+	@Override
+	public String toString() {
+		return "Flight [departureLocation=" + departureLocation + ", arrivalLocation=" + arrivalLocation
+				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", flightNumber=" + flightNumber
+				+ ", planeType=" + planeType + "]";
+	}
+	
 }
