@@ -6,6 +6,7 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import flights.Airport;
@@ -53,6 +54,27 @@ public class AirlineManagerSingleton {
 	}
 	
 
+	public boolean bookFlight(UserAccounts account, Seat seat) {
+		if(seat.isAvailable() == true) {
+			seat.setAvailable(false);
+			List<Seat> flights = account.getBookedFlights();
+			flights.add(seat);
+			account.setBookedFlights(flights);
+			
+		}
+		return false;
+	}
+	
+	public boolean cancelFlight(UserAccounts account, Seat seat) {
+		if(account.getBookedFlights().contains(seat)) {
+			seat.setAvailable(true);
+			List<Seat> flights = account.getBookedFlights();
+			flights.remove(seat);
+			account.setBookedFlights(flights);
+			return true;
+		}
+		return false;
+	}
 
 	// Test
 	public Flight generateRandomFlights()
