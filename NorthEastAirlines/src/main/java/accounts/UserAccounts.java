@@ -13,6 +13,7 @@ public class UserAccounts
 	private String firstName;
 	private String lastName;
 	private List<Flight> bookedFlights;
+	private boolean isLoggedIn;
 	
 	public String getUsername() {
 		return username;
@@ -55,5 +56,20 @@ public class UserAccounts
 	}
 	public void setBookedFlights(List<Flight> bookedFlights) {
 		this.bookedFlights = bookedFlights;
+	}
+	
+	
+	// Access login status
+	public boolean getLoginStatus() {
+		if(this.isLoggedIn == true) {
+			return true;
+		}
+		return false;
+	}
+	
+	// Set the login status
+	public boolean setLoginStatus(boolean value) {
+		this.isLoggedIn = value;
+		return true;	// Returns true always cause it should never fail!!
 	}
 }
