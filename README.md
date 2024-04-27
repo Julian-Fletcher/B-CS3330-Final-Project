@@ -1,5 +1,5 @@
 # CS3330 Object Oriented Final Project - Group B
-CS3330 Final Project. This Java program TBD. 
+CS3330 Final Project. This is an airline booking software. It provides users the ability to create accounts, login, book and cancel flights, and update their information. 
 
 ## Getting Started
 ### Dependencies
