@@ -2,6 +2,7 @@ package flights;
 
 import java.util.Random;
 
+import edu.mu.NorthEastAirlines.Flight;
 import flights.PlaneObject;
 import seatSelection.Seat;
 import seatSelection.SeatType;
@@ -22,7 +23,7 @@ public class PlaneFactory {
 	    	if(random.nextInt(3) == 1) {
 	    		seat.setAvailable(false);
 	    	}
-	    	
+	    
 	    	newplane.addSeat(seat);
 	    	
 	    }

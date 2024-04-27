@@ -74,4 +74,16 @@ public class PlaneObject {
 		}
 		return narrowseats;
 	}
+	
+	public void setFlight(Flight flight) {
+		for(Seat seat : this.getAllSeats(SeatType.COMFORT)) {
+			seat.setFlight(flight);
+		}
+		for(Seat seat : this.getAllSeats(SeatType.COMFORT)) {
+			seat.setFlight(flight);
+		}
+		for(Seat seat : this.getAllSeats(SeatType.COMFORT)) {
+			seat.setFlight(flight);
+		}
+	}
 }

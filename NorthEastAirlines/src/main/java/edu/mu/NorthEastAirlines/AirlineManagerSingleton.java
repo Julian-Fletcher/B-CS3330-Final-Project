@@ -16,7 +16,9 @@ import flights.PlaneObject;
 import accounts.AccountStatus;
 import accounts.UserAccounts;
 import flights.PlaneType;
-
+import seatSelection.EmeraldSeatSelection;
+import seatSelection.GoldSeatSelection;
+import seatSelection.IronSeatSelection;
 import seatSelection.Seat;
 import seatSelection.SeatSelectionStrategy;
 import seatSelection.SeatType;
@@ -54,27 +56,27 @@ public class AirlineManagerSingleton {
 	}
 	
 
-	public boolean bookFlight(UserAccounts account, Seat seat) {
-		if(seat.isAvailable() == true) {
-			seat.setAvailable(false);
-			List<Seat> flights = account.getBookedFlights();
-			flights.add(seat);
-			account.setBookedFlights(flights);
-			
+	public boolean bookFlight(UserAccounts account, Flight flight, int seatNumber) {
+		if(account.getMembershipLevel() == AccountStatus.EMERALD) {
+			EmeraldSeatSelection select = new EmeraldSeatSelection();
+			select.selectSeat(flight, account.getMembershipLevel(), seatNumber);
+			return true;
 		}
+		if(account.getMembershipLevel() == AccountStatus.GOLD) {
+			GoldSeatSelection select = new GoldSeatSelection();
+			select.selectSeat(flight, account.getMembershipLevel(), seatNumber);
+			return true;
+		}
+		if(account.getMembershipLevel() == AccountStatus.IRON) {
+			IronSeatSelection select = new IronSeatSelection();
+			select.selectSeat(flight, account.getMembershipLevel(), seatNumber);
+			return true;
+		}
+		
 		return false;
 	}
 	
-	public boolean cancelFlight(UserAccounts account, Seat seat) {
-		if(account.getBookedFlights().contains(seat)) {
-			seat.setAvailable(true);
-			List<Seat> flights = account.getBookedFlights();
-			flights.remove(seat);
-			account.setBookedFlights(flights);
-			return true;
-		}
-		return false;
-	}
+
 
 	// Test
 	public Flight generateRandomFlights()
@@ -114,6 +116,7 @@ public class AirlineManagerSingleton {
 		flightNumber = randomFlightNumber();
 		
 		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, flightNumber, plane);
+		plane
 		return newFlight;
 	}
 

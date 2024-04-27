@@ -3,7 +3,6 @@ package accounts;
 import java.util.List;
 
 import edu.mu.NorthEastAirlines.Flight;
-import seatSelection.Seat;
 
 public class UserAccounts 
 {
@@ -13,7 +12,7 @@ public class UserAccounts
 	private AccountStatus membershipLevel;
 	private String firstName;
 	private String lastName;
-	private List<Seat> bookedFlights;
+	private List<Flight> bookedFlights;
 	private boolean isLoggedIn;
 	
 	public String getUsername() {
@@ -52,10 +51,10 @@ public class UserAccounts
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public List<Seat> getBookedFlights() {
+	public List<Flight> getBookedFlights() {
 		return bookedFlights;
 	}
-	public void setBookedFlights(List<Seat> bookedFlights) {
+	public void setBookedFlights(List<Flight> bookedFlights) {
 		this.bookedFlights = bookedFlights;
 	}
 	
