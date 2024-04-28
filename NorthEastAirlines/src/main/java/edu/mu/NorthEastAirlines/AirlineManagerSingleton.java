@@ -284,7 +284,7 @@ public class AirlineManagerSingleton {
 	}
 	
 	/* Locates a user account by username*/
-	protected UserAccounts locateByUsername(String username) {
+	private UserAccounts locateByUsername(String username) {
 		// Loop through accounts, find the one we're looking for
 		for(UserAccounts account : this.allAccounts) {
 			if(account.getUsername().equals(username)) {

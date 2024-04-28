@@ -6,6 +6,6 @@ import edu.mu.NorthEastAirlines.Flight;
 
 public interface SeatSelectionStrategy {
 	public boolean viewAvailableSeats(Flight flight);
-	public boolean selectSeat(Flight flight, AccountStatus accountLevel, int seatNumber );
+	public int selectSeat(Flight flight, AccountStatus accountLevel, int seatNumber);
 	
 }
