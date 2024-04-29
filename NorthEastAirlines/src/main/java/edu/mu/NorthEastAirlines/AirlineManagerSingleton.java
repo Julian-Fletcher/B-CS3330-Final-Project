@@ -76,9 +76,8 @@ public class AirlineManagerSingleton {
 		return false;
 	}
 	
-
-
-	// Test
+	
+	//*********************** GENERATE RANDOM FLIGHT STARTS HERE *************************************
 	public Flight generateRandomFlights()
 	{
 		Airport arriveAirport = new Airport();
@@ -86,8 +85,10 @@ public class AirlineManagerSingleton {
 		LocalDateTime departTime;
 		LocalDateTime arriveTime;
 		int flightNumber = -1;
+		
 		//Creates Plane Factory
 		PlaneFactory planeFactory = new PlaneFactory();
+		
 		//Generates new plane
 		PlaneObject plane = planeFactory.generaterRandomPlane();
 		AirportLocations arriveLocal = AirportLocations.getAirportLocations(randomAirportLocation());
@@ -116,11 +117,9 @@ public class AirlineManagerSingleton {
 		flightNumber = randomFlightNumber();
 		
 		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, flightNumber, plane);
-		plane
 		return newFlight;
 	}
 
-	
 	public String randomAirportCode()
 	{
 		Random random = new Random();
@@ -166,6 +165,8 @@ public class AirlineManagerSingleton {
 	     LocalDateTime localDateTime = LocalDateTime.of(year1, month1, day1, hour1, minute1, second1);
 	     return localDateTime;
 	}
+	
+	//*********************** GENERATE RANDOM FLIGHT ENDS HERE *************************************
 	
 	/* Little management methods~*/
 	private boolean updateAccountIndex(int update) {
