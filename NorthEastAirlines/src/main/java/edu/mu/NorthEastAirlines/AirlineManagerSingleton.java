@@ -117,6 +117,7 @@ public class AirlineManagerSingleton {
 		flightNumber = randomFlightNumber();
 		
 		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, flightNumber, plane);
+		
 		return newFlight;
 	}
 

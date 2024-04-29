@@ -43,7 +43,7 @@ public class FlightManagement
 		departAirport.airportCode = randomAirportCode();
 		departAirport.city = departLocal.toString();
 		flightNumber = randomFlightNumber();
-		plane.setModel(PlaneType.gePlaneType(randomPlaneType()));
+		plane.setModel(PlaneType.getPlaneType(randomPlaneType()));
 		
 		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, flightNumber, plane);
 		return newFlight;

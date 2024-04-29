@@ -57,7 +57,7 @@ public class PlaneObject {
 	
 	public ArrayList<Seat> getAvailableSeats(SeatType type) {
 		ArrayList<Seat> narrowseats = new ArrayList<Seat>();
-		System.out.println("CALLED2");
+
 		for(Seat seat : this.seats) {
 			if(seat.getSeatType() == type && seat.isAvailable()) {
 				narrowseats.add(seat);
@@ -75,15 +75,15 @@ public class PlaneObject {
 		return narrowseats;
 	}
 	
-	public void setFlight(Flight flight) {
-		for(Seat seat : this.getAllSeats(SeatType.COMFORT)) {
-			seat.setFlight(flight);
-		}
-		for(Seat seat : this.getAllSeats(SeatType.COMFORT)) {
-			seat.setFlight(flight);
-		}
-		for(Seat seat : this.getAllSeats(SeatType.COMFORT)) {
-			seat.setFlight(flight);
-		}
-	}
+//	public void setFlight(Flight flight) {
+//		for(Seat seat : this.getAllSeats(SeatType.COMFORT)) {
+//			seat.setFlight(flight);
+//		}
+//		for(Seat seat : this.getAllSeats(SeatType.COMFORT)) {
+//			seat.setFlight(flight);
+//		}
+//		for(Seat seat : this.getAllSeats(SeatType.COMFORT)) {
+//			seat.setFlight(flight);
+//		}
+//	}
 }

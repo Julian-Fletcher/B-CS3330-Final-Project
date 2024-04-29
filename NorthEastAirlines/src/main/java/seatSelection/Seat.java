@@ -6,7 +6,7 @@ public class Seat {
 	private int seatNumber;
 	private SeatType seatType;
 	private boolean available;
-	private Flight flight;
+//	private Flight flight;
 	
 	public Seat(int number, SeatType type) {
 		this.seatNumber = number;
@@ -31,10 +31,10 @@ public class Seat {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}	
-	public Flight getFlight() {
-		return this.flight;
-	}
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}	
+//	public Flight getFlight() {
+//		return this.flight;
+//	}
+//	public void setFlight(Flight flight) {
+//		this.flight = flight;
+//	}	
 }

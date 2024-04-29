@@ -14,7 +14,7 @@ public enum PlaneType {
 	{
 		return planeVal;
 	}
-	public static PlaneType gePlaneType(int planeVal)
+	public static PlaneType getPlaneType(int planeVal)
 	{
 		for(PlaneType planes : PlaneType.values())
 		{
