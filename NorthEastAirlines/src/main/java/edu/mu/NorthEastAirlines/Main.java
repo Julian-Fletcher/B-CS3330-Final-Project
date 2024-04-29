@@ -16,6 +16,8 @@ public class Main {
 		System.out.println(flight.getAvailableSeats(SeatType.COMFORT));
 		System.out.println(flight.getAllSeats(SeatType.COMFORT));
 		
+		manager.printAccounts("a");
+		
 		
 	}
 

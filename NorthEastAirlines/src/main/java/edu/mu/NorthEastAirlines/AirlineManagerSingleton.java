@@ -26,7 +26,7 @@ import seatSelection.SeatType;
 
 
 public class AirlineManagerSingleton {
-	private String adminPassword;
+	private String adminPassword = "a";
 	private ArrayList<UserAccounts> allAccounts;
 	public ArrayList<Flight> allFlights;
 	public boolean isAdminLoggedIn;	// Check if admin account logged in
@@ -48,7 +48,7 @@ public class AirlineManagerSingleton {
 			instance.accountIndex = 0;
 			instance.allAccounts = new ArrayList<UserAccounts>();
 			// FLIGHT LIST NEED INIT HERE
-			
+	
 			instance.isAdminLoggedIn = false;
 			
 		}
@@ -340,6 +340,30 @@ public class AirlineManagerSingleton {
 		// Probrably delete flight reservations as well
 		// Will be done afte flight booking is figured out
 	}
+	
+	
+	
+	
+	
+	public void printAccounts(String password) {
+		System.out.println(password.equals(adminPassword));
+		
+		if(password.equals(adminPassword)) {
+			
+			System.out.println("ID, USERNAME, FIRST, LAST, MEMBERSHIP, # OF BOOKED FLIGHTS");
+			if(allAccounts != null && allAccounts.size() > 0) {
+				for(UserAccounts user : allAccounts) {
+					System.out.println(user.getId() + ", " + user.getUsername() + ", " + user.getFirstName() + ", " + user.getLastName() + ", " + user.getMembershipLevel() + ", " + user.getBookedFlights().size());
+				}
+			}else {
+				System.out.println("No Accounts Currently Available");
+			}
+		}
+	}
+	
+	
+	
+	
 	
 	/* *************** ACCOUNT MANAGEMENT METHODS END HERE ***************  */
 	
