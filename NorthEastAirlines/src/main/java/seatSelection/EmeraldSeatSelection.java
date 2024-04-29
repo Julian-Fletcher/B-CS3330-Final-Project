@@ -9,31 +9,31 @@ import edu.mu.NorthEastAirlines.Flight;
 public class EmeraldSeatSelection implements SeatSelectionStrategy{
 
 	@Override
-	public boolean viewAvailableSeats(Flight flight) {
+	public ArrayList<Seat> viewAvailableSeats(Flight flight) {
 		// Create a list of all available seats
 		ArrayList<Seat> availableSeats = flight.getAvailableSeats(SeatType.FIRST_CLASS);
 		availableSeats.addAll(flight.getAvailableSeats(SeatType.COMFORT));
 		availableSeats.addAll(flight.getAvailableSeats(SeatType.ECONOMY));
 		
 		if(availableSeats.isEmpty()) {
-			return false;
+			return null;
 		}
 		// Print all seat information
 		for(Seat seat : availableSeats) {
 			System.out.println(seat.getSeatType() + " Seat Number: " + seat.getSeatNumber());
 		}
-		return true;
+		return availableSeats;
 	}
 
 	@Override
-	public int selectSeat(Flight flight, AccountStatus accountLevel, int seatNumber) {
+	public int selectSeat(Flight flight, AccountStatus accountLevel) {
 		try {
 			int selectedSeat;
 			// List seats on flight
-			boolean seatList = viewAvailableSeats(flight);
+			ArrayList<Seat> seatList = viewAvailableSeats(flight);
 			
 			// Error handling
-			if(seatList != true) {
+			if(seatList.isEmpty()) {
 				return -1;
 			}
 			
@@ -46,9 +46,13 @@ public class EmeraldSeatSelection implements SeatSelectionStrategy{
 			selectedSeat = scanner.nextInt();
 			
 			// If seat picked isn't available, throw exception, prompt for new input
-			if(flight.getSeatAvailability(seatNumber) == false) {
-				scanner.close();
-				throw new IllegalArgumentException("Seat not available.");	// Needs handling later
+			for(Seat seat : seatList) {
+				if(seat.getSeatNumber() == selectedSeat) {
+					if(seat.isAvailable() == false) {
+						scanner.close();
+						throw new IllegalArgumentException("Seat not available.");	// Needs handling later
+					}
+				}
 			}
 			
 			scanner.close();

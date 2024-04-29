@@ -26,30 +26,27 @@ import seatSelection.SeatType;
 
 
 public class AirlineManagerSingleton {
-	private String adminPassword = "a";
-	private ArrayList<UserAccounts> allAccounts;
-	public ArrayList<Flight> allFlights;
-	public boolean isAdminLoggedIn;	// Check if admin account logged in
+
+	private String adminPassword;
+	private ArrayList<UserAccounts> allAccounts = new ArrayList<>();
+	private ArrayList<Flight> allFlights = new ArrayList<>();
+	private boolean isAdminLoggedIn;	// Check if admin account logged in
+
 	private int accountIndex;
 	
 	private static AirlineManagerSingleton instance = null;		// Only one!
 	private SeatSelectionStrategy strategy;	// SeatSelectionStrategy
 	
 	
-//	public AirlineManagerSingleton() {
-//	
-//	}
+	public AirlineManagerSingleton() {
+	
+	}
 	
 	// Singleton initalizer. Only allows one!!
 	// Does not yet make admin account!
 	public static AirlineManagerSingleton getInstance() {
 		if(instance == null) {
 			instance = new AirlineManagerSingleton();
-			instance.accountIndex = 0;
-			instance.allAccounts = new ArrayList<UserAccounts>();
-			// FLIGHT LIST NEED INIT HERE
-	
-			instance.isAdminLoggedIn = false;
 			
 		}
 		return instance;
@@ -256,7 +253,7 @@ public class AirlineManagerSingleton {
 		// Check if  account exists
 		UserAccounts requestedAccount = this.locateByUsername(username);
 		if(requestedAccount == null) {
-			System.out.println("Account with username '" + username + "' exists!");
+			System.out.println("Account with username '" + username + "' does not exist!");
 			return false;
 		}
 		
@@ -270,6 +267,7 @@ public class AirlineManagerSingleton {
 		try {
 			if(this.verifyPassword(password, requestedAccount) == true) {
 				System.out.println("Welome, " + requestedAccount.getFirstName() + "! Let's go somewhere.");
+				requestedAccount.setLoginStatus(true);
 				return true;
 			}
 			else {
@@ -312,7 +310,7 @@ public class AirlineManagerSingleton {
 		AccountStatus memberLevel = account.getMembershipLevel();
 		
 		// Print it out!
-		System.out.println("Username" + usr + "Name: " + firstName + lastName + "AccountID: " + acctID + "Membership Level: " + memberLevel + "Reserved Flights: ");
+		System.out.println("Username " + usr + " Name: " + firstName + lastName + " AccountID: " + acctID + " Membership Level: " + memberLevel + " Reserved Flights: ");
 		return true;
 		
 	}
@@ -336,6 +334,8 @@ public class AirlineManagerSingleton {
 	
 	// User can delete their accouont
 	public boolean deleteAccount(String username, String password) {
+		return false;
+		
 		// Logout & delete from acct list
 		// Probrably delete flight reservations as well
 		// Will be done afte flight booking is figured out

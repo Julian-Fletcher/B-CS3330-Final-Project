@@ -15,6 +15,7 @@ public class UserAccounts
 	private String lastName;
 	private List<UserFlightData> bookedFlights;
 	private boolean isLoggedIn;
+	private int points;
 	
 	public String getUsername() {
 		return username;
@@ -60,6 +61,24 @@ public class UserAccounts
 	}
 	
 	
+	public int getUserPoints() {
+		return this.points;
+	}
+	
+	public boolean updatePoints(int addition) {
+		if(addition < 0) {
+			return false;
+		}
+		this.points += addition;
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "UserAccounts [username=" + username + ", password=" + password + ", id=" + id + ", membershipLevel="
+				+ membershipLevel + ", firstName=" + firstName + ", lastName=" + lastName + ", bookedFlights="
+				+ bookedFlights + ", isLoggedIn=" + isLoggedIn + ", points=" + points + "]";
+	}
 	// Access login status
 	public boolean getLoginStatus() {
 		if(this.isLoggedIn == true) {

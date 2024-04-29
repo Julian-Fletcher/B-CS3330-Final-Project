@@ -1,24 +1,45 @@
 package edu.mu.NorthEastAirlines;
 
+import accounts.UserAccounts;
 import flights.PlaneFactory;
 import flights.PlaneObject;
 import seatSelection.SeatType;
 public class Main {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("THIS IS WOKRING");
-
-		AirlineManagerSingleton manager = new AirlineManagerSingleton();
+	public static void main(String[] args) {	
 		
-		Flight flight = manager.generateRandomFlights();
+		// Create singleton 
+		AirlineManagerSingleton alm = new AirlineManagerSingleton();
+		alm.getInstance();
 		
-		System.out.println(flight.getAvailableSeats(SeatType.COMFORT));
-		System.out.println(flight.getAllSeats(SeatType.COMFORT));
+		// Create first account
+		UserAccounts acct1 = new UserAccounts();
+		UserAccounts acct2 = new UserAccounts();
+		UserAccounts acct3 = new UserAccounts();
+		UserAccounts acct4 = new UserAccounts();
 		
 		manager.printAccounts("a");
 		
 		
+		// Create user accounts
+		acct1 = alm.createAccount("Abcd", "abcd", "Bob", "Ross");
+		acct2 = alm.createAccount("uwfd", "abcd", "John", "Billigo");
+		acct3 = alm.createAccount("ctosm", "defg", "Hillbilly", "Jinglo");
+		acct4 = alm.createAccount("abcd", "defg", "Mister", "Donnovan");
+		
+		
+		System.out.println("**** PRINTING ACCOUNT INFORMATION ****");
+		System.out.println(acct1.toString());
+		System.out.println(acct2.toString());
+		System.out.println(acct3.toString());
+		System.out.println(acct4.toString());
+		
+		boolean loggedIn = alm.login("Abcd", "abcd");
+		boolean invalidLogin = alm.login("a", "abcd");
+		boolean doubleLog = alm.login("Abcd", "abcd");
+		
+		//alm.listBookedFlights("Abcd");
+		alm.viewAccountInformation("Abcd");
 	}
 
 }

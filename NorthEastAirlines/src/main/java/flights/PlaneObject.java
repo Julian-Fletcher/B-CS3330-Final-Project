@@ -59,7 +59,7 @@ public class PlaneObject {
 		ArrayList<Seat> narrowseats = new ArrayList<Seat>();
 
 		for(Seat seat : this.seats) {
-			if(seat.getSeatType() == type && seat.isAvailable()) {
+			if(seat.getSeatType().equals(type) && seat.isAvailable()) {
 				narrowseats.add(seat);
 			}
 		}

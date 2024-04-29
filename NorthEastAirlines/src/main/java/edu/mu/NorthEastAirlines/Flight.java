@@ -17,7 +17,6 @@ public class Flight {
 	LocalDateTime arrivalTime;
 	int flightNumber;
 	PlaneObject planeType;
-	ArrayList<Seat> allSeats;	// Flights need a seat list
 	
 	public Flight(Airport departureLocation, Airport arrivalLocation, LocalDateTime departureTime,
 			LocalDateTime arrivalTime, int flightNumber, PlaneObject planeType) {
@@ -82,18 +81,6 @@ public class Flight {
 				+ ", planeType=" + planeType + "]";
 	}
 	
-	
-	public boolean getSeatAvailability(int seatNumber) {
-		boolean availability; 
-		
-		for(Seat seat : this.allSeats) {
-			if(seat.getSeatNumber() == seatNumber) {
-				availability = seat.isAvailable();
-				return availability;
-			}
-		}
-		// If seat doesn't exist
-		return false;
-	}
+
 	
 }
