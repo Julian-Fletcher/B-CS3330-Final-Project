@@ -16,17 +16,17 @@ public class Flight {
 	LocalDateTime departureTime;
 	LocalDateTime arrivalTime;
 	int flightNumber;
-	PlaneObject planeType;
+	PlaneObject planeObject;
 	
 	public Flight(Airport departureLocation, Airport arrivalLocation, LocalDateTime departureTime,
-			LocalDateTime arrivalTime, int flightNumber, PlaneObject planeType) {
+			LocalDateTime arrivalTime, int flightNumber, PlaneObject planeObject) {
 		super();
 		this.departureLocation = departureLocation;
 		this.arrivalLocation = arrivalLocation;
 		this.departureTime = departureTime;
 		this.arrivalTime = arrivalTime;
 		this.flightNumber = flightNumber;
-		this.planeType = planeType;
+		this.planeObject = planeObject;
 	}
 	public Airport getDepartureLocation() {
 		return departureLocation;
@@ -54,12 +54,12 @@ public class Flight {
 	}
 	public ArrayList<Seat> getAvailableSeats(SeatType type) {
 		System.out.println("CALLED");
-		return planeType.getAvailableSeats(type);
+		return planeObject.getAvailableSeats(type);
 	}
 	
 	public ArrayList<Seat> getAllSeats(SeatType type) {
 		System.out.println("CALLED");
-		return planeType.getAllSeats(type);
+		return planeObject.getAllSeats(type);
 	}
 
 	public int getFlightNumber() {
@@ -69,16 +69,16 @@ public class Flight {
 		this.flightNumber = flightNumber;
 	}
 	public PlaneObject getPlaneType() {
-		return planeType;
+		return planeObject;
 	}
 	public void setPlaneType(PlaneObject planeType) {
-		this.planeType = planeType;
+		this.planeObject = planeType;
 	}
 	@Override
 	public String toString() {
 		return "Flight [departureLocation=" + departureLocation + ", arrivalLocation=" + arrivalLocation
 				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", flightNumber=" + flightNumber
-				+ ", planeType=" + planeType + "]";
+				+ ", planeType=" + planeObject + "]";
 	}
 	
 

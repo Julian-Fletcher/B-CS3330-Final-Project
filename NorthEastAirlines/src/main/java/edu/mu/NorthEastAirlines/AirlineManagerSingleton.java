@@ -16,6 +16,7 @@ import flights.PlaneObject;
 import accounts.AccountStatus;
 import accounts.UserAccounts;
 import flights.PlaneType;
+import flights.UserFlightData;
 import seatSelection.EmeraldSeatSelection;
 import seatSelection.GoldSeatSelection;
 import seatSelection.IronSeatSelection;
@@ -283,6 +284,7 @@ public class AirlineManagerSingleton {
 		
 	}
 	
+	
 	public boolean logout(String username, String password) {
 		UserAccounts requestedAccount = this.locateByUsername(username);
 		if(requestedAccount == null) {
@@ -358,16 +360,35 @@ public class AirlineManagerSingleton {
 		}
 		
 		// Print the users booked flights
-		ArrayList<Flight> flights = (ArrayList<Flight>)account.getBookedFlights();
-		for(Flight flight : flights) {
-			System.out.println(flight.toString());
+		ArrayList<UserFlightData> flights = (ArrayList<UserFlightData>)account.getBookedFlights();
+		for(UserFlightData flight : flights) {
+			System.out.println("Flight: " + flight.getFlight() + " Seat: " +  flight.getSeat());
 		}
 		return true;
 	}
 	
 	// User can delete their accouont
 	public boolean deleteAccount(String username, String password) {
-		return false;
+		// Find the account
+		UserAccounts requestedAccount = this.locateByUsername(username);
+		if(requestedAccount == null) {
+			System.out.println("Account with username '" + username + "' does not exist!");
+			return false;
+		}
+		
+		// Log into account
+		boolean logIn = this.login(username, password);
+		
+		if(logIn == false) {
+			return false;
+		}
+		
+		
+		
+		
+		// Remove the acount from the account list
+		this.allAccounts.remove(requestedAccount);
+		return true;
 		
 		// Logout & delete from acct list
 		// Probrably delete flight reservations as well
@@ -413,5 +434,20 @@ public class AirlineManagerSingleton {
 	
 	
 	/* *************** FLIGHT METEHODS HERE ***************  */
+	boolean cancelFlightReservation(int flightNumber, String username) {
+		// Get account
+		UserAccounts account = this.locateByUsername(username);
+		if(account == null) {
+			return false;
+		}
+		
+//		for(Flight flight : this.allFlights) {
+//			if(flight.getFlightNumber() == flightNumber) {
+//				
+//			}
+//		}
+		return true;
+	}
+	
 	
 }

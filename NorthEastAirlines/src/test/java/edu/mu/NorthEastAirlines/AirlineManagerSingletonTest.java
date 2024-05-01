@@ -89,6 +89,9 @@ public class AirlineManagerSingletonTest extends TestCase {
 		
 		// Login and logout of account1
 		boolean login3 = testManager.login("test5", "test5");
+		// Test logout with incorrect password
+		boolean wrongPassLogout = testManager.logout("test5", "wrongPassword");
+		
 		boolean logout = testManager.logout("test5", "test5");
 		assertTrue("Account should be logged out", logout);
 		
@@ -99,13 +102,41 @@ public class AirlineManagerSingletonTest extends TestCase {
 		boolean logout2 = testManager.logout("test6", "test6");
 		assertFalse("Account should not be logged out", logout2);
 		
+		// Test with account that does not exist
+		boolean falseLogOut = testManager.logout("nouser", "nouser");
+		assertFalse("Account should not report existing", falseLogOut);
+		
+		
+		
 		
 	}
 	
 	
-//	public void testDeleteAccount() {
-//		
-//	}
+	public void testDeleteAccount() {
+		// Create singleton
+		AirlineManagerSingleton testManager = AirlineManagerSingleton.getInstance();
+		
+		// Create accounts
+		UserAccounts account1 = testManager.createAccount("deleteTest", "test5" , "john", "shame");
+		
+		// Delete account correctly
+		boolean deleteAccount= testManager.deleteAccount("deleteTest", "test5");
+		assertTrue("Accounts shouldn't be deleted", deleteAccount);
+		
+		// Delete account, wrong password
+		boolean deleteWrong = testManager.deleteAccount("deleteTest", "test6");
+		assertFalse("Account should not be deleted", deleteWrong);
+		
+		// Delete account that doesn't exist
+		boolean deleteDoesntExist = testManager.deleteAccount("noAccountDelete", "abcd");
+		assertFalse("Accounts should not report deleted", deleteDoesntExist);
+		
+		
+		// Delete already deleted account
+		boolean deleteDeleted = testManager.deleteAccount("deleteTest", "test5");
+		assertFalse("Accounts shouldn't be deleted", deleteDeleted);
+		
+	}
 //	
 //	public void testBookSeat() {
 //		

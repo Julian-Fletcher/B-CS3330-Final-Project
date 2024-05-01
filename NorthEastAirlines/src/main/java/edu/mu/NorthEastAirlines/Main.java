@@ -18,7 +18,7 @@ public class Main {
 		UserAccounts acct3 = new UserAccounts();
 		UserAccounts acct4 = new UserAccounts();
 		
-		manager.printAccounts("a");
+		
 		
 		
 		// Create user accounts
