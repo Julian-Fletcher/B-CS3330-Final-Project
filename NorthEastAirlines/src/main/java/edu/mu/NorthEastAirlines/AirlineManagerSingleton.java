@@ -260,14 +260,47 @@ public class AirlineManagerSingleton {
 		// Check if already logged in
 		if(requestedAccount.getLoginStatus() == true) {
 			System.out.println("Already logged in! Did you mean to logout?");
-			return true;	// True for logged in always
+			return false;	// True for logged in always
 		}
 		
 		// If not already logged in
 		try {
 			if(this.verifyPassword(password, requestedAccount) == true) {
-				System.out.println("Welome, " + requestedAccount.getFirstName() + "! Let's go somewhere.");
+				System.out.println("Welcome, " + requestedAccount.getFirstName() + "! Let's go somewhere.");
 				requestedAccount.setLoginStatus(true);
+				return true;
+			}
+			else {
+				System.out.println("Incorrect password!");
+				return false;
+			}
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+		
+	}
+	
+	public boolean logout(String username, String password) {
+		UserAccounts requestedAccount = this.locateByUsername(username);
+		if(requestedAccount == null) {
+			System.out.println("Account with username '" + username + "' does not exist!");
+			return false;
+		}
+		
+		// Check if not logged in
+		if(requestedAccount.getLoginStatus() == false) {
+			System.out.println("User not logged in! Did you mean to login?");
+			return false;	// True for logged out always
+		}
+		
+		// If currently logged in
+		try {
+			if(this.verifyPassword(password, requestedAccount) == true) {
+				System.out.println("Goodbye, " + requestedAccount.getFirstName() + "! See you soon.");
+				requestedAccount.setLoginStatus(false);
 				return true;
 			}
 			else {
