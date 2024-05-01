@@ -60,6 +60,10 @@ public class UserAccounts
 		this.bookedFlights = bookedFlights;
 	}
 	
+	public void setUserPoints(int points)
+	{
+		this.points = points;
+	}
 	
 	public int getUserPoints() {
 		return this.points;

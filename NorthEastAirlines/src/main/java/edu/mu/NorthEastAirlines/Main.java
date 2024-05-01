@@ -40,6 +40,15 @@ public class Main {
 		
 		//alm.listBookedFlights("Abcd");
 		alm.viewAccountInformation("Abcd");
+		
+		
+		
+		Flight flight1 = alm.generateRandomFlights();
+		Flight flight2 = alm.generateRandomFlights();
+		alm.bookFlight(acct1, flight1);
+		System.out.println("User1 Points: " + acct1.getUserPoints());
+		alm.bookFlight(acct2, flight2);
+		System.out.println("User2 Points: " + acct2.getUserPoints());
 	}
 
 }
