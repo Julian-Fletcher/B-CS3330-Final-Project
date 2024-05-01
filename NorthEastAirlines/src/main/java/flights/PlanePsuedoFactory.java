@@ -2,11 +2,33 @@ package flights;
 
 import java.util.Random;
 
+import edu.mu.NorthEastAirlines.AirlineManagerSingleton;
 import edu.mu.NorthEastAirlines.Flight;
 import flights.PlaneObject;
 import seatSelection.Seat;
+import seatSelection.SeatSelectionStrategy;
 import seatSelection.SeatType;
-public class PlaneFactory {
+public class PlanePsuedoFactory {
+
+
+	private static PlanePsuedoFactory instance = null;		// Only one!
+
+	
+	
+	public PlanePsuedoFactory() {
+	
+	}
+	
+	// Singleton initalizer. Only allows one!!
+	// Does not yet make admin account!
+	public static PlanePsuedoFactory getInstance() {
+		if(instance == null) {
+			instance = new PlanePsuedoFactory();
+			
+		}
+		return instance;
+	}
+	
 
 	public PlaneObject generaterRandomPlane() {
 		PlaneObject newplane = new PlaneObject();

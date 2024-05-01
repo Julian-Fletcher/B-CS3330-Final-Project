@@ -5,8 +5,10 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="flights.SeatType"/>
     <fullyQualifiedTypeName name="flights.PlaneFactory"/>
-    <fullyQualifiedTypeName name="seatSelection.Seat"/>
     <fullyQualifiedTypeName name="flights.PlaneObject"/>
     <fullyQualifiedTypeName name="seatSelection.SeatType"/>
     <fullyQualifiedTypeName name="flights.Airport"/>
+    <fullyQualifiedTypeName name="seatSelection.Seat"/>
+    <fullyQualifiedTypeName name="edu.mu.NorthEastAirlines.Flight"/>
+    <fullyQualifiedTypeName name="flights.UserFlightData"/>
 </qualifiedTypeNameHistroy>

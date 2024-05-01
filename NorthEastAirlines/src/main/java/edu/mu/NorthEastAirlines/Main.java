@@ -1,7 +1,7 @@
 package edu.mu.NorthEastAirlines;
 
 import accounts.UserAccounts;
-import flights.PlaneFactory;
+import flights.PlanePsuedoFactory;
 import flights.PlaneObject;
 import seatSelection.SeatType;
 public class Main {

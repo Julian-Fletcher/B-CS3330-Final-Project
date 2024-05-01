@@ -11,7 +11,7 @@ import java.util.Random;
 
 import flights.Airport;
 import flights.AirportLocations;
-import flights.PlaneFactory;
+import flights.PlanePsuedoFactory;
 import flights.PlaneObject;
 import accounts.AccountStatus;
 import accounts.UserAccounts;
@@ -85,7 +85,7 @@ public class AirlineManagerSingleton {
 		int flightNumber = -1;
 		
 		//Creates Plane Factory
-		PlaneFactory planeFactory = new PlaneFactory();
+		PlanePsuedoFactory planeFactory = new PlanePsuedoFactory();
 		
 		//Generates new plane
 		PlaneObject plane = planeFactory.generaterRandomPlane();
