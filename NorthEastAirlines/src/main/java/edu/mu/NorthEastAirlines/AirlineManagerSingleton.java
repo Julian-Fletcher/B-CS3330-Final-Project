@@ -361,16 +361,10 @@ public class AirlineManagerSingleton {
 			return false;
 		}
 		
-		
-		
-		
-		// Remove the acount from the account list
+		// Remove the account from the account list
 		this.allAccounts.remove(requestedAccount);
+		this.updateAccountIndex(2); // decrement account index
 		return true;
-		
-		// Logout & delete from acct list
-		// Probrably delete flight reservations as well
-		// Will be done afte flight booking is figured out
 	}
 	
 	
