@@ -94,6 +94,7 @@ public class AirlineManagerSingleton {
 		
 		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, flightNumber, plane);
 		
+		System.out.println("New Random Flight Generated");
 		return newFlight;
 	}
 
@@ -435,21 +436,21 @@ public class AirlineManagerSingleton {
 		{
 			EmeraldSeatSelection select = new EmeraldSeatSelection();
 			select.selectSeat(flight, account.getMembershipLevel());
-			account.setUserPoints(account.getUserPoints() + 500);
+			account.setUserPoints(account.getUserPoints() + 200);
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.GOLD) 
 		{
 			GoldSeatSelection select = new GoldSeatSelection();
 			select.selectSeat(flight, account.getMembershipLevel());
-			account.setUserPoints(account.getUserPoints() + 500);
+			account.setUserPoints(account.getUserPoints() + 100);
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.IRON) 
 		{
 			IronSeatSelection select = new IronSeatSelection();
 			select.selectSeat(flight, account.getMembershipLevel());
-			account.setUserPoints(account.getUserPoints() + 500);
+			account.setUserPoints(account.getUserPoints() + 50);
 			return true;
 		}
 		return false;
