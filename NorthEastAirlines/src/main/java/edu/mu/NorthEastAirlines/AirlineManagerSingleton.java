@@ -53,28 +53,6 @@ public class AirlineManagerSingleton {
 		return instance;
 	}
 	
-
-	public boolean bookFlight(UserAccounts account, Flight flight, int seatNumber) {
-		if(account.getMembershipLevel() == AccountStatus.EMERALD) {
-			EmeraldSeatSelection select = new EmeraldSeatSelection();
-			select.selectSeat(flight, account.getMembershipLevel(), seatNumber);
-			return true;
-		}
-		if(account.getMembershipLevel() == AccountStatus.GOLD) {
-			GoldSeatSelection select = new GoldSeatSelection();
-			select.selectSeat(flight, account.getMembershipLevel(), seatNumber);
-			return true;
-		}
-		if(account.getMembershipLevel() == AccountStatus.IRON) {
-			IronSeatSelection select = new IronSeatSelection();
-			select.selectSeat(flight, account.getMembershipLevel(), seatNumber);
-			return true;
-		}
-		
-		return false;
-	}
-	
-	
 	//*********************** GENERATE RANDOM FLIGHT STARTS HERE *************************************
 	public Flight generateRandomFlights()
 	{
@@ -449,5 +427,32 @@ public class AirlineManagerSingleton {
 		return true;
 	}
 	
-	
+	/* *************** BOOK FLIGHT METEHOD STARTS HERE ***************  */
+
+	public boolean bookFlight(UserAccounts account, Flight flight) 
+	{
+		if(account.getMembershipLevel() == AccountStatus.EMERALD) 
+		{
+			EmeraldSeatSelection select = new EmeraldSeatSelection();
+			select.selectSeat(flight, account.getMembershipLevel());
+			account.setUserPoints(account.getUserPoints() + 500);
+			return true;
+		}
+		if(account.getMembershipLevel() == AccountStatus.GOLD) 
+		{
+			GoldSeatSelection select = new GoldSeatSelection();
+			select.selectSeat(flight, account.getMembershipLevel());
+			account.setUserPoints(account.getUserPoints() + 500);
+			return true;
+		}
+		if(account.getMembershipLevel() == AccountStatus.IRON) 
+		{
+			IronSeatSelection select = new IronSeatSelection();
+			select.selectSeat(flight, account.getMembershipLevel());
+			account.setUserPoints(account.getUserPoints() + 500);
+			return true;
+		}
+		return false;
+	}
+	/* *************** BOOK FLIGHT METEHOD ENDS HERE ***************  */
 }
