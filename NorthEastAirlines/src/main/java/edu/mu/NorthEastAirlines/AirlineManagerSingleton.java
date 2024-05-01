@@ -449,5 +449,44 @@ public class AirlineManagerSingleton {
 		return true;
 	}
 	
-	
+	/* *************** BOOK FLIGHT METEHOD STARTS HERE ***************  */
+	public boolean bookFlight(int flightNumber, int accountID)
+	{
+		for(Flight flight : allFlights)
+		{
+			if(flight.getFlightNumber() == flightNumber)
+			{
+				for(UserAccounts acc : allAccounts)
+				{
+					if(acc.getId() == accountID)
+					{
+						switch(acc.getMembershipLevel())
+						{
+							case EMERALD:
+							{
+								EmeraldSeatSelection emStrat = new EmeraldSeatSelection();
+								setSeatSelectionStrategy(emStrat);
+							}
+							case GOLD:
+							{
+								GoldSeatSelection goldStrat = new GoldSeatSelection();
+								setSeatSelectionStrategy(goldStrat);
+							}
+							case IRON:
+							{
+								IronSeatSelection ironStrat = new IronSeatSelection();
+								setSeatSelectionStrategy(ironStrat);
+							}
+							default:
+							{
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+	/* *************** BOOK FLIGHT METEHOD ENDS HERE ***************  */
 }
