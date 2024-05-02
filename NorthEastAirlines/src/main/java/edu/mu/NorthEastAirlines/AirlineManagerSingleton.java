@@ -463,7 +463,7 @@ public class AirlineManagerSingleton {
 		
 		System.out.print("Select a Flight Number: ");
 		selectedFlight = scan.nextInt();
-		scan.close();
+		//scan.close();
 		return allFlights.get(selectedFlight);
 	}
 }

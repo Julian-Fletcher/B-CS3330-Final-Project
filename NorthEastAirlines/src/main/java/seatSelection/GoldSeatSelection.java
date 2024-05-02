@@ -33,6 +33,7 @@ public class GoldSeatSelection implements SeatSelectionStrategy{
 			
 			// Error handling
 			if(seatList.isEmpty()) {
+				System.out.println("No seat list!!");
 				return -1;
 			}
 			
@@ -48,13 +49,13 @@ public class GoldSeatSelection implements SeatSelectionStrategy{
 			for(Seat seat : seatList) {
 				if(seat.getSeatNumber() == selectedSeat) {
 					if(seat.isAvailable() == false) {
-						scanner.close();
+						//scanner.close();
 						throw new IllegalArgumentException("Seat not available.");	// Needs handling later
 					}
 				}
 			}
 			
-			scanner.close();
+			//scanner.close();
 			return selectedSeat;
 			
 			

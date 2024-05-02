@@ -9,44 +9,28 @@ public class Main {
 	public static void main(String[] args) {	
 		
 		// Create singleton 
-		AirlineManagerSingleton alm = new AirlineManagerSingleton();
-		alm.getInstance();
+		AirlineManagerSingleton alm = AirlineManagerSingleton.getInstance();
 		
 		// Create first account
-		UserAccounts acct1 = new UserAccounts();
-		UserAccounts acct2 = new UserAccounts();
-		UserAccounts acct3 = new UserAccounts();
-		UserAccounts acct4 = new UserAccounts();
-		
-		
-		
+		UserAccounts acct1 = new UserAccounts();		
 		
 		// Create user accounts
-		acct1 = alm.createAccount("Abcd", "abcd", "Bob", "Ross");
-		acct2 = alm.createAccount("uwfd", "abcd", "John", "Billigo");
-		acct3 = alm.createAccount("ctosm", "defg", "Hillbilly", "Jinglo");
-		acct4 = alm.createAccount("abcd", "defg", "Mister", "Donnovan");
+		acct1 = alm.createAccount("test1", "password", "test", "test");
+		boolean login = alm.login("test1", "password");
+		if(!login) {
+			System.out.println("Login failed!");
+		}
 		
+		System.out.println("Viewing Account information");
+		alm.viewAccountInformation("test1");
 		
-		System.out.println("**** PRINTING ACCOUNT INFORMATION ****");
-		System.out.println(acct1.toString());
-		System.out.println(acct2.toString());
-		System.out.println(acct3.toString());
-		System.out.println(acct4.toString());
-		
-		boolean loggedIn = alm.login("Abcd", "abcd");
-		boolean invalidLogin = alm.login("a", "abcd");
-		boolean doubleLog = alm.login("Abcd", "abcd");
-		
-		//alm.listBookedFlights("Abcd");
-		alm.viewAccountInformation("Abcd");
-		
-		System.out.println("\n");
 		alm.generateRandomFlights();
 		alm.generateRandomFlights();
 		alm.generateRandomFlights();
-		System.out.println("\n");
-		alm.bookFlight(acct1);
+		
+		System.out.println("*** Booking Flight *** \n\n");
+		boolean book = alm.bookFlight(acct1);
+
 	}
 
 }
