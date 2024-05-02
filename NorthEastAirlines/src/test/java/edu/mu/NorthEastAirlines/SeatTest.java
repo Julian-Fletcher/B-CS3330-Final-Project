@@ -2,29 +2,35 @@ package edu.mu.NorthEastAirlines;
 
 import accounts.AccountStatus;
 import accounts.UserAccounts;
-import junit.framework.TestCase;
 import seatSelection.Seat;
 import seatSelection.SeatType;
 
-public class SeatTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+public class SeatTest {
 
 	public void testSeatCreation() {
 		// Testing here
 		
 		Seat seat = new Seat(24, SeatType.COMFORT);
 		
-		assertNotNull("Should be a seat", seat);
+		assertNotNull(seat, "Should be a seat");
 		
 	}
 	
 	public void testSeatAvailability() {
 		Seat seat = new Seat(24, SeatType.COMFORT);
 		
-		assertTrue("Seat should start available",seat.isAvailable());
+		assertTrue(seat.isAvailable(),"Seat should start available");
 		seat.setAvailable(false);
-		assertFalse("Seat should not be available",seat.isAvailable());
+		assertFalse(seat.isAvailable(),"Seat should not be available");
 		seat.setAvailable(true);
-		assertTrue("Seat should be available",seat.isAvailable());
+		assertTrue(seat.isAvailable(),"Seat should be available");
 	}
 
 	

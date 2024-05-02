@@ -4,11 +4,12 @@
     <fullyQualifiedTypeName name="accounts.UserAccounts"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="flights.SeatType"/>
-    <fullyQualifiedTypeName name="flights.PlaneFactory"/>
-    <fullyQualifiedTypeName name="flights.PlaneObject"/>
-    <fullyQualifiedTypeName name="seatSelection.SeatType"/>
     <fullyQualifiedTypeName name="flights.Airport"/>
-    <fullyQualifiedTypeName name="seatSelection.Seat"/>
     <fullyQualifiedTypeName name="edu.mu.NorthEastAirlines.Flight"/>
     <fullyQualifiedTypeName name="flights.UserFlightData"/>
+    <fullyQualifiedTypeName name="seatSelection.SeatType"/>
+    <fullyQualifiedTypeName name="flights.PlaneFactory"/>
+    <fullyQualifiedTypeName name="flights.PlaneObject"/>
+    <fullyQualifiedTypeName name="flights.PlaneType"/>
+    <fullyQualifiedTypeName name="seatSelection.Seat"/>
 </qualifiedTypeNameHistroy>
