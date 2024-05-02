@@ -8,6 +8,9 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
+
+import javax.swing.text.View;
 
 import flights.Airport;
 import flights.AirportLocations;
@@ -54,13 +57,13 @@ public class AirlineManagerSingleton {
 	}
 	
 	//*********************** GENERATE RANDOM FLIGHT STARTS HERE *************************************
-	public Flight generateRandomFlights()
+	public boolean generateRandomFlights()
 	{
 		Airport arriveAirport = new Airport();
 		Airport departAirport = new Airport();
 		LocalDateTime departTime;
 		LocalDateTime arriveTime;
-		int flightNumber = -1;
+		int flightNumber = -999;
 		
 		//Creates Plane Factory
 		PlanePsuedoFactory planeFactory = new PlanePsuedoFactory();
@@ -90,15 +93,18 @@ public class AirlineManagerSingleton {
 		arriveAirport.city = arriveLocal.toString();
 		departAirport.airportCode = randomAirportCode();
 		departAirport.city = departLocal.toString();
-		flightNumber = randomFlightNumber();
+		flightNumber = allFlights.size();
 		
 		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, flightNumber, plane);
-		
-		System.out.println("New Random Flight Generated");
-		return newFlight;
+		if(newFlight != null)
+		{
+			System.out.println("New Random Flight Generated");
+			allFlights.add(newFlight);
+		}
+		return true;
 	}
 
-	public String randomAirportCode()
+	private String randomAirportCode()
 	{
 		Random random = new Random();
 		StringBuilder sb = new StringBuilder();
@@ -110,27 +116,22 @@ public class AirlineManagerSingleton {
 		return sb.toString();
 	}
 	
-	public int randomAirportLocation()
+	private int randomAirportLocation()
 	{
 		int maxLocations = 10;
 		Random random = new Random();
 		return random.nextInt(maxLocations);
 	}
 	
-	public int randomFlightNumber()
+	/*public int randomFlightNumber()
 	{
 		Random random = new Random();
 		int id = random.nextInt(9000) + 1000;
 		return id;
-	}
+	}*/
 	
-	public int randomPlaneType()
-	{
-		Random random = new Random();
-		return random.nextInt(3);
-	}
 	
-	public LocalDateTime randomLocalDateTime()
+	private LocalDateTime randomLocalDateTime()
 	{
 		 Random random = new Random();
 	     int year1 = random.nextInt(2025 - 2000) + 2000;
@@ -423,31 +424,46 @@ public class AirlineManagerSingleton {
 	}
 	
 	/* *************** BOOK FLIGHT METEHOD STARTS HERE ***************  */
-
-	public boolean bookFlight(UserAccounts account, Flight flight) 
+	public boolean bookFlight(UserAccounts account) 
 	{
+		Flight flight = viewPotentialFlights();
 		if(account.getMembershipLevel() == AccountStatus.EMERALD) 
 		{
 			EmeraldSeatSelection select = new EmeraldSeatSelection();
-			select.selectSeat(flight, account.getMembershipLevel());
+			System.out.println("First Class: " + select.selectSeat(flight, account.getMembershipLevel()) + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 200);
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.GOLD) 
 		{
 			GoldSeatSelection select = new GoldSeatSelection();
-			select.selectSeat(flight, account.getMembershipLevel());
+			System.out.println("Comfort Class: " + select.selectSeat(flight, account.getMembershipLevel()) + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 100);
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.IRON) 
 		{
 			IronSeatSelection select = new IronSeatSelection();
-			select.selectSeat(flight, account.getMembershipLevel());
+			System.out.println("Economy Class: " + select.selectSeat(flight, account.getMembershipLevel()) + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 50);
 			return true;
 		}
 		return false;
 	}
 	/* *************** BOOK FLIGHT METEHOD ENDS HERE ***************  */
+	protected Flight viewPotentialFlights()
+	{	
+		Scanner scan = new Scanner(System.in);
+		int selectedFlight;
+		
+		for(Flight flight : allFlights)
+		{
+			System.out.println("Flight Num: " + flight.flightNumber + ". To: " + flight.departureLocation.city);
+		}
+		
+		System.out.print("Select a Flight Number: ");
+		selectedFlight = scan.nextInt();
+		scan.close();
+		return allFlights.get(selectedFlight);
+	}
 }

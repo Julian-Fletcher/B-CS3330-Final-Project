@@ -41,9 +41,12 @@ public class Main {
 		//alm.listBookedFlights("Abcd");
 		alm.viewAccountInformation("Abcd");
 		
-		Flight flight = alm.generateRandomFlights();
-		alm.bookFlight(acct4, flight);
-		alm.bookFlight(acct3, flight);
+		System.out.println("\n");
+		alm.generateRandomFlights();
+		alm.generateRandomFlights();
+		alm.generateRandomFlights();
+		System.out.println("\n");
+		alm.bookFlight(acct1);
 	}
 
 }
