@@ -62,6 +62,11 @@ public class Flight {
 		return planeObject.getAllSeats(type);
 	}
 
+	public void changeSeatAvailabilityToFalse(Seat seat)
+	{
+		seat.setAvailable(false);
+	}
+	
 	public int getFlightNumber() {
 		return flightNumber;
 	}
@@ -80,7 +85,4 @@ public class Flight {
 				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", flightNumber=" + flightNumber
 				+ ", planeType=" + planeObject + "]";
 	}
-	
-
-	
 }

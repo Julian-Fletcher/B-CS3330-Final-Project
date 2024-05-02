@@ -29,8 +29,8 @@ public class Main {
 		alm.generateRandomFlights();
 		
 		System.out.println("*** Booking Flight *** \n\n");
-		boolean book = alm.bookFlight(acct1);
-
+		boolean book1 = alm.bookFlight(acct1);
+		boolean book2 = alm.bookFlight(acct1);
 	}
 
 }

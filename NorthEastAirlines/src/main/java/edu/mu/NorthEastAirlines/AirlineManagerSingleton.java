@@ -6,6 +6,7 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -98,7 +99,6 @@ public class AirlineManagerSingleton {
 		Flight newFlight = new Flight(departAirport, arriveAirport, departTime, arriveTime, flightNumber, plane);
 		if(newFlight != null)
 		{
-			System.out.println("New Random Flight Generated");
 			allFlights.add(newFlight);
 		}
 		return true;
@@ -430,22 +430,47 @@ public class AirlineManagerSingleton {
 		if(account.getMembershipLevel() == AccountStatus.EMERALD) 
 		{
 			EmeraldSeatSelection select = new EmeraldSeatSelection();
-			System.out.println("First Class: " + select.selectSeat(flight, account.getMembershipLevel()) + " is now reserved!!!");
+			int newSeat = select.selectSeat(flight, account.getMembershipLevel());
+			for(Seat seat : flight.getAllSeats(SeatType.ECONOMY))
+			{
+				if(seat.getSeatNumber() == newSeat)
+				{
+					flight.changeSeatAvailabilityToFalse(seat);
+				}
+			}
+			System.out.println("First Class: " + newSeat + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 200);
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.GOLD) 
 		{
 			GoldSeatSelection select = new GoldSeatSelection();
-			System.out.println("Comfort Class: " + select.selectSeat(flight, account.getMembershipLevel()) + " is now reserved!!!");
+			int newSeat = select.selectSeat(flight, account.getMembershipLevel());
+			for(Seat seat : flight.getAllSeats(SeatType.ECONOMY))
+			{
+				if(seat.getSeatNumber() == newSeat)
+				{
+					flight.changeSeatAvailabilityToFalse(seat);
+				}
+			}
+			System.out.println("Comfort Class: " + newSeat + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 100);
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.IRON) 
 		{
 			IronSeatSelection select = new IronSeatSelection();
-			System.out.println("Economy Class: " + select.selectSeat(flight, account.getMembershipLevel()) + " is now reserved!!!");
+			int newSeat = select.selectSeat(flight, account.getMembershipLevel());
+			for(Seat seat : flight.getAllSeats(SeatType.ECONOMY))
+			{
+				if(seat.getSeatNumber() == newSeat)
+				{
+					flight.changeSeatAvailabilityToFalse(seat);
+				}
+			}
+			System.out.println("Economy Class: " + newSeat + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 50);
+			System.out.println("Updated points: " + account.getUserPoints());
 			return true;
 		}
 		return false;
