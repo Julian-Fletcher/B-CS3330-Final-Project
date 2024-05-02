@@ -431,7 +431,7 @@ public class AirlineManagerSingleton {
 		{
 			EmeraldSeatSelection select = new EmeraldSeatSelection();
 			int newSeat = select.selectSeat(flight, account.getMembershipLevel());
-			for(Seat seat : flight.getAllSeats(SeatType.ECONOMY))
+			for(Seat seat : flight.getAllSeats(SeatType.FIRST_CLASS))
 			{
 				if(seat.getSeatNumber() == newSeat)
 				{
@@ -440,13 +440,18 @@ public class AirlineManagerSingleton {
 			}
 			System.out.println("First Class: " + newSeat + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 200);
+			UserFlightData flightData = new UserFlightData(flight.flightNumber, newSeat, SeatType.FIRST_CLASS);
+			ArrayList<UserFlightData> userDataList = new ArrayList<UserFlightData>();
+			userDataList.add(flightData);
+			account.setBookedFlights(userDataList);
+			System.out.println("Updated points: " + account.getUserPoints());
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.GOLD) 
 		{
 			GoldSeatSelection select = new GoldSeatSelection();
 			int newSeat = select.selectSeat(flight, account.getMembershipLevel());
-			for(Seat seat : flight.getAllSeats(SeatType.ECONOMY))
+			for(Seat seat : flight.getAllSeats(SeatType.COMFORT))
 			{
 				if(seat.getSeatNumber() == newSeat)
 				{
@@ -455,6 +460,11 @@ public class AirlineManagerSingleton {
 			}
 			System.out.println("Comfort Class: " + newSeat + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 100);
+			UserFlightData flightData = new UserFlightData(flight.flightNumber, newSeat, SeatType.COMFORT);
+			ArrayList<UserFlightData> userDataList = new ArrayList<UserFlightData>();
+			userDataList.add(flightData);
+			account.setBookedFlights(userDataList);
+			System.out.println("Updated points: " + account.getUserPoints());
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.IRON) 
@@ -470,6 +480,10 @@ public class AirlineManagerSingleton {
 			}
 			System.out.println("Economy Class: " + newSeat + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 50);
+			UserFlightData flightData = new UserFlightData(flight.flightNumber, newSeat, SeatType.ECONOMY);
+			ArrayList<UserFlightData> userDataList = new ArrayList<UserFlightData>();
+			userDataList.add(flightData);
+			account.setBookedFlights(userDataList);
 			System.out.println("Updated points: " + account.getUserPoints());
 			return true;
 		}
