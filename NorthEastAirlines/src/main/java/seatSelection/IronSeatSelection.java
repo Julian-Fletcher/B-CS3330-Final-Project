@@ -1,5 +1,6 @@
 package seatSelection;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -63,6 +64,12 @@ public class IronSeatSelection implements SeatSelectionStrategy{
 			return -1;
 		}
 		
+		
 	}
 
+	@Override
+	public void changeAvailablityToFalse(Flight flight, int index) 
+	{
+		flight.changeSeatAvailabilityToFalse(viewAvailableSeats(flight).get(index));
+	}
 }

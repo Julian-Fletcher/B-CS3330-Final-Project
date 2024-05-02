@@ -65,5 +65,9 @@ public class GoldSeatSelection implements SeatSelectionStrategy{
 		}
 	}
 	
-
+	@Override
+	public void changeAvailablityToFalse(Flight flight, int index) 
+	{
+		flight.changeSeatAvailabilityToFalse(viewAvailableSeats(flight).get(index));
+	}
 }
