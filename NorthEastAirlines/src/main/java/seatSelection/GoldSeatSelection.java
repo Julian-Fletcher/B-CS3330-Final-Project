@@ -42,7 +42,7 @@ public class GoldSeatSelection implements SeatSelectionStrategy{
 			// Select seat, set as not available, something else
 			
 			// Get seat number
-			System.out.println("Please select a seat: ");		
+			System.out.print("Please select a seat: ");		
 			selectedSeat = scanner.nextInt();
 			
 			// If seat picked isn't available, throw exception, prompt for new input

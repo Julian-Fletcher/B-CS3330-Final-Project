@@ -40,6 +40,7 @@ public class Main {
 		System.out.println("User Points: " + acct1.getUserPoints());
 		//alm.viewPlaneSeats(1);
 		//alm.viewAvailableFlights();
+		System.out.println("Membership Level: " + acct1.getMembershipLevel());
 	}
 
 }

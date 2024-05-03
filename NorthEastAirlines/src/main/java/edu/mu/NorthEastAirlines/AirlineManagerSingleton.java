@@ -444,7 +444,7 @@ public class AirlineManagerSingleton {
 			ArrayList<UserFlightData> userDataList = new ArrayList<UserFlightData>();
 			userDataList.add(flightData);
 			account.setBookedFlights(userDataList);
-			System.out.println("Updated points: " + account.getUserPoints());
+			System.out.println("Updated points: " + account.getUserPoints() + " points");
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.GOLD) 
@@ -464,7 +464,7 @@ public class AirlineManagerSingleton {
 			ArrayList<UserFlightData> userDataList = new ArrayList<UserFlightData>();
 			userDataList.add(flightData);
 			account.setBookedFlights(userDataList);
-			System.out.println("Updated points: " + account.getUserPoints());
+			System.out.println("Updated points: " + account.getUserPoints() + " points");
 			return true;
 		}
 		if(account.getMembershipLevel() == AccountStatus.IRON) 
@@ -484,7 +484,7 @@ public class AirlineManagerSingleton {
 			ArrayList<UserFlightData> userDataList = new ArrayList<UserFlightData>();
 			userDataList.add(flightData);
 			account.setBookedFlights(userDataList);
-			System.out.println("Updated points: " + account.getUserPoints());
+			System.out.println("Updated points: " + account.getUserPoints() + " points");
 			return true;
 		}
 		return false;
