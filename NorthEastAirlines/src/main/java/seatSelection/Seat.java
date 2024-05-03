@@ -37,4 +37,8 @@ public class Seat {
 //	public void setFlight(Flight flight) {
 //		this.flight = flight;
 //	}	
+	@Override
+	public String toString() {
+		return "Seat [seatNumber=" + seatNumber + ", seatType=" + seatType + ", available=" + available + "]";
+	}
 }

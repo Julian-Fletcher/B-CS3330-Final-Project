@@ -81,8 +81,8 @@ public class Flight {
 	}
 	@Override
 	public String toString() {
-		return "Flight [departureLocation=" + departureLocation + ", arrivalLocation=" + arrivalLocation
+		return "Flight [departureLocation=" + departureLocation.city + ", arrivalLocation=" + arrivalLocation.city
 				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", flightNumber=" + flightNumber
-				+ ", planeType=" + planeObject + "]";
+				+ ", planeType=" + planeObject.getModel().name() + "]";
 	}
 }

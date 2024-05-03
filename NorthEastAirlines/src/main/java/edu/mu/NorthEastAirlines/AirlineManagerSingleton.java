@@ -505,4 +505,42 @@ public class AirlineManagerSingleton {
 		//scan.close();
 		return allFlights.get(selectedFlight);
 	}
+	
+	public void viewAvailableFlights()
+	{
+		for(Flight flight : allFlights)
+		{
+			System.out.println(flight.toString());
+		}
+	}
+	
+	public void addFlightsToMasterList(int count)
+	{
+		for(int i = 0; i < count; i++)
+		{
+			generateRandomFlights();
+		}
+	}
+	
+	public void viewPlaneSeats(int searchFlightNumber)
+	{
+		for(Flight flight : allFlights)
+		{
+			if(flight.flightNumber  == searchFlightNumber)
+			{
+				for(Seat seat : flight.getAllSeats(SeatType.FIRST_CLASS))
+				{
+					System.out.println(seat.toString());
+				}
+				for(Seat seat : flight.getAllSeats(SeatType.COMFORT))
+				{
+					System.out.println(seat.toString());
+				}
+				for(Seat seat : flight.getAllSeats(SeatType.ECONOMY))
+				{
+					System.out.println(seat.toString());
+				}
+			}
+		}
+	}
 }

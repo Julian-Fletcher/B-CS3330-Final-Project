@@ -25,19 +25,21 @@ public class Main {
 		System.out.println("Viewing Account information");
 		alm.viewAccountInformation("test1");
 		
-		alm.generateRandomFlights();
-		alm.generateRandomFlights();
-		alm.generateRandomFlights();
+		alm.addFlightsToMasterList(4);
+		//alm.viewPlaneSeats(1);
 		
 		System.out.println("*** Booking Flight *** \n\n");
 		boolean book1 = alm.bookFlight(acct1);
-		System.out.println("\n");
+		System.out.print("\nBooked Flight Details for: " + acct1.getFirstName() + "\n");
 		for(UserFlightData data: acct1.getBookedFlights())
 		{
 			System.out.println("Flight Number: " + data.getFlight());
 			System.out.println("Seat Number: " + data.getSeat());
 			System.out.println("Seat Type: " + data.getSeatType().name());
 		}
+		System.out.println("User Points: " + acct1.getUserPoints());
+		//alm.viewPlaneSeats(1);
+		//alm.viewAvailableFlights();
 	}
 
 }
