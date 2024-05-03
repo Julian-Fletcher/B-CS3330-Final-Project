@@ -25,6 +25,7 @@ public class Main {
 		System.out.println("Viewing Account information");
 		alm.viewAccountInformation("test1");
 		
+		/*
 		alm.addFlightsToMasterList(4);
 		//alm.viewPlaneSeats(1);
 		
@@ -41,6 +42,15 @@ public class Main {
 		//alm.viewPlaneSeats(1);
 		//alm.viewAvailableFlights();
 		System.out.println("Membership Level: " + acct1.getMembershipLevel());
+		*/
+		
+		String username = "test1";
+		String password = "password";
+		String newPassword = "newPassword";
+		//alm.changeMembershipLevel(username, password);
+		alm.changePassword(username, password, newPassword);
+		alm.logout(username, password);
+		alm.logout(username, newPassword);
 	}
 
 }
