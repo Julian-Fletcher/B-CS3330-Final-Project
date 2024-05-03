@@ -123,14 +123,6 @@ public class AirlineManagerSingleton {
 		return random.nextInt(maxLocations);
 	}
 	
-	/*public int randomFlightNumber()
-	{
-		Random random = new Random();
-		int id = random.nextInt(9000) + 1000;
-		return id;
-	}*/
-	
-	
 	private LocalDateTime randomLocalDateTime()
 	{
 		 Random random = new Random();
@@ -369,10 +361,6 @@ public class AirlineManagerSingleton {
 		return true;
 	}
 	
-	
-	
-	
-	
 	public void printAccounts(String password) {
 		System.out.println(password.equals(adminPassword));
 		
@@ -389,9 +377,84 @@ public class AirlineManagerSingleton {
 		}
 	}
 	
+	public boolean changePassword(String username, String password)
+	{
+		boolean login = this.login(username, password);
+		if(login == true)
+		{
+			for(UserAccounts acct : allAccounts)
+			{
+				if(acct.getUsername() == username)
+				{
+					acct.setUserPoints(acct.getUserPoints() - 10);
+					try 
+					{
+						acct.setPassword(hashPassword(password));
+					} catch (NoSuchAlgorithmException e) 
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
 	
-	
-	
+	public boolean changeMembershipLevel(String username, String password)
+	{
+		boolean login = this.login(username, password);
+		if(login == true)
+		{
+			for(UserAccounts acct : allAccounts)
+			{
+				if(acct.getUsername() == username)
+				{
+					if(acct.getUserPoints() >= 500)
+					{
+						if(acct.getMembershipLevel() == AccountStatus.IRON)
+						{
+							System.out.println("You're already IRON status yah dummy.");
+						}
+						else 
+						{
+							acct.setMembershipLevel(AccountStatus.IRON);
+						}
+					}
+					else if(acct.getUserPoints() >= 1000)
+					{
+						if(acct.getMembershipLevel() == AccountStatus.GOLD)
+						{
+							System.out.println("You're already GOLD status. You'll be fine.");
+						}
+						else 
+						{
+							acct.setMembershipLevel(AccountStatus.GOLD);
+						}
+					}
+					else if(acct.getUserPoints() >= 2000)
+					{
+						if(acct.getMembershipLevel() == AccountStatus.EMERALD)
+						{
+							System.out.println("You're already EMERALD status. You're such a greedy person");
+						}
+						else 
+						{
+							acct.setMembershipLevel(AccountStatus.EMERALD);
+						}
+					}
+				}
+			}
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
 	
 	/* *************** ACCOUNT MANAGEMENT METHODS END HERE ***************  */
 	
