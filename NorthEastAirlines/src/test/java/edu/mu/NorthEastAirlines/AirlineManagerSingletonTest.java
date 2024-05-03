@@ -7,6 +7,8 @@ import accounts.UserAccounts;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 
 class AirlineManagerSingletonTest {
 	
@@ -142,6 +144,21 @@ class AirlineManagerSingletonTest {
 		assertFalse(deleteDeleted,"Accounts shouldn't be deleted");
 		
 	}
+	
+	
+	@Test
+	void testViewAccountInformation(){
+		AirlineManagerSingleton testManager = AirlineManagerSingleton.getInstance();
+		
+		UserAccounts testValidAccount = testManager.createAccount("TestValid", "psw", "test", "test");
+		UserAccounts testInvalidAccount = new UserAccounts();
+		
+		assertTrue(testManager.viewAccountInformation(testValidAccount.getUsername()));
+		assertFalse(testManager.viewAccountInformation(testInvalidAccount.getUsername()));
+		
+		
+	}
+	
 //	
 //	public void testBookSeat() {
 //		
