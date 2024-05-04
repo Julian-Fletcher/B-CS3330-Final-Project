@@ -558,4 +558,26 @@ public class AirlineManagerSingleton {
 			}
 		}
 	}
+	
+	
+	
+	public boolean changeMembershipLevel(UserAccounts user, AccountStatus membership) {
+		int points = user.getUserPoints();
+		if(points >= 1000 && membership == AccountStatus.EMERALD) {
+			user.setMembershipLevel(AccountStatus.EMERALD);
+			user.setUserPoints(points-1000);
+			return true;
+		}else if(points >= 500 && membership == AccountStatus.GOLD) {
+			user.setMembershipLevel(AccountStatus.GOLD);
+			user.setUserPoints(points-500);
+			return true;
+		} else {
+			return false;
+		}
+		
+		
+		
+	}
+		
+	
 }
