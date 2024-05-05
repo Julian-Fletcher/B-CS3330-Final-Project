@@ -51,6 +51,24 @@ public class Main {
 		alm.changePassword(username, password, newPassword);
 		alm.logout(username, password);
 		alm.logout(username, newPassword);
+		
+		
+		
+		
+		/*
+		 * Demo psedocode
+		 * 1) Init singleton
+		 * 2) Create account
+		 * - Could be multiple to demonstrate error cheecking
+		 * 3) Login to account
+		 * 4) Book flight(s)
+		 * 5) View account information
+		 * 6) Cancel a flight
+		 * 7) View account information 
+		 * 8) Delete account
+		 * 9) Attempt to login to invalid account (show delete account works!)
+		 * 10) YAY DONE!!
+		 */
 	}
 
 }

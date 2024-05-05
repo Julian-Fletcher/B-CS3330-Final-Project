@@ -29,7 +29,12 @@ import seatSelection.SeatSelectionStrategy;
 import seatSelection.SeatType;
 
 
-
+/**
+ * Primary class that contains all core project functionality. 
+ * <p>
+ * Class uses singleton strategy design to ensure no duplicates possible, as 
+ * only one manager should exist at a time. It contains account and fight management methods.
+ */
 public class AirlineManagerSingleton {
 
 	private String adminPassword;
@@ -49,6 +54,14 @@ public class AirlineManagerSingleton {
 	
 	// Singleton initalizer. Only allows one!!
 	// Does not yet make admin account!
+	/**
+	 * Initializes one instance of the AirlineManagerSingleton.
+	 * The singleton is returned to the user to access other core functionality. 
+	 * Prevents multiple objects from being instantiated, if the user
+	 * attempts to create multiple, the same object will be returned each time. 
+	 * 
+	 * @return An AirlineManagerSingleton object
+	 */
 	public static AirlineManagerSingleton getInstance() {
 		if(instance == null) {
 			instance = new AirlineManagerSingleton();
@@ -157,7 +170,18 @@ public class AirlineManagerSingleton {
 	/* *************** ACCOUNT MANAGEMENT METHODS BEGIN HERE ***************  */
 	
 	
-	/* Account creation method */	
+	/* Account creation method */
+	/**
+	 * Creates a user account object with the provided information and returns that object to them.
+	 * <p>
+	 * Account usernames must be unique, if a duplicate username is provided the account will not be created. 
+	 * 
+	 * @param username 	The username the user would like to use
+	 * @param password 	The password for the account
+	 * @param firstName The user's first name
+	 * @param lastName 	The user's last name
+	 * @return			A UserAccounts object
+	 */
 	public UserAccounts createAccount(String username, String password, String firstName, String lastName) {
 		// Check if the username is taken already
 		if(this.locateByUsername(username) != null) {
@@ -220,6 +244,16 @@ public class AirlineManagerSingleton {
 	/* Method to log users in, will set login status to true if 
 	 * account credentials match
 	 */
+	/**
+	 * Logs a user into their account after authenticating a provided username and password.
+	 * <p>
+	 * If an account does not exist or the user provides an incorrect password they will not
+	 * be logged into the account. 
+	 * 
+	 * @param username	The account username
+	 * @param password	The password to the account
+	 * @return			Returns whether the account was logged into or not
+	 */
 	public boolean login(String username, String password) {
 		// Need checking for if admin account
 		
@@ -257,6 +291,13 @@ public class AirlineManagerSingleton {
 	}
 	
 	
+	/**
+	 * Logs a user out of their account if provided credentials are correct.
+	 * 
+	 * @param username	The account username seeking to be logged out
+	 * @param password	The password of the account
+	 * @return			Returns whether the account has been logged out or not
+	 */
 	public boolean logout(String username, String password) {
 		UserAccounts requestedAccount = this.locateByUsername(username);
 		if(requestedAccount == null) {
@@ -303,6 +344,13 @@ public class AirlineManagerSingleton {
 	
 	
 	/* Allows a user to view their account information */
+	/**
+	 * Prints relevant user account information.
+	 * 
+	 * 
+	 * @param username	The username of the requested account
+	 * @return			Returns true if the account was found and information printed
+	 */
 	public boolean viewAccountInformation(String username) {
 		UserAccounts account = this.locateByUsername(username);
 		if(account == null) {
@@ -323,6 +371,12 @@ public class AirlineManagerSingleton {
 	}
 	
 	/* User can view their flights */
+	/**
+	 * Lists the booked flights of a user. 
+	 * 
+	 * @param username	Requested account username
+	 * @return			Returns true if the account was found and information was printed
+	 */
 	public boolean listBookedFlights(String username) { 
 		
 		// Get account
@@ -340,6 +394,14 @@ public class AirlineManagerSingleton {
 	}
 	
 	// User can delete their accouont
+	/**
+	 * Deletes a user accuount by removing it from the account list.
+	 * 
+	 * 
+	 * @param username	Username of account wanting to be deleted
+	 * @param password	Password of account 
+	 * @return			Returns true if the account has been deleted
+	 */
 	public boolean deleteAccount(String username, String password) {
 		// Find the account
 		UserAccounts requestedAccount = this.locateByUsername(username);
@@ -415,6 +477,11 @@ public class AirlineManagerSingleton {
 	/* *************** SEAT SELECTION METHOD ***************  */
 	
 	// Sets seat selection strategy 
+	/**
+	 * Changes the current seat selection strategy
+	 * 
+	 * @param strategy	The strategy to change to
+	 */
 	public void setSeatSelectionStrategy(SeatSelectionStrategy strategy) {
 		this.strategy = strategy;
 	}

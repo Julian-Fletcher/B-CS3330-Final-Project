@@ -8,7 +8,7 @@ import accounts.AccountStatus;
 import edu.mu.NorthEastAirlines.Flight;
 
 public class IronSeatSelection implements SeatSelectionStrategy{
-
+	
 	@Override
 	public ArrayList<Seat> viewAvailableSeats(Flight flight) {
 		// Get economy seats

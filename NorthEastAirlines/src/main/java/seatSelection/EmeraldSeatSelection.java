@@ -7,7 +7,7 @@ import accounts.AccountStatus;
 import edu.mu.NorthEastAirlines.Flight;
 
 public class EmeraldSeatSelection implements SeatSelectionStrategy{
-
+	
 	@Override
 	public ArrayList<Seat> viewAvailableSeats(Flight flight) {
 		// Create a list of all available seats
