@@ -2,12 +2,20 @@ package flights;
 
 import java.util.Random;
 
+
+
 import edu.mu.NorthEastAirlines.AirlineManagerSingleton;
 import edu.mu.NorthEastAirlines.Flight;
 import flights.PlaneObject;
 import seatSelection.Seat;
 import seatSelection.SeatSelectionStrategy;
 import seatSelection.SeatType;
+
+
+/**
+ * Class used for creating random PlaneObject instances.
+ * Named *PsuedoFactory because it is not a true Factory.
+ */
 public class PlanePsuedoFactory {
 
 
@@ -21,6 +29,12 @@ public class PlanePsuedoFactory {
 	
 	// Singleton initalizer. Only allows one!!
 	// Does not yet make admin account!
+	
+	/**
+	 * Gets/Initializes instance of singleton PlanePsuedoFactory.
+	 * 
+	 * @return			Instance of PlanePsuedoFactory
+	 */
 	public static PlanePsuedoFactory getInstance() {
 		if(instance == null) {
 			instance = new PlanePsuedoFactory();
@@ -29,7 +43,12 @@ public class PlanePsuedoFactory {
 		return instance;
 	}
 	
-
+	/**
+	 * Generates a random plane for Flight.
+	 * 
+	 * @see Flight
+	 * @return			PlaneObject with a randomly assigned number/availability of seats
+	 */
 	public PlaneObject generaterRandomPlane() {
 		PlaneObject newplane = new PlaneObject();
 		Random random = new Random();

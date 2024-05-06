@@ -1,5 +1,8 @@
 package flights;
 
+/**
+ * Class that contains information about available airport locations to choose from.
+ */
 public enum AirportLocations 
 {
 	NewYorkCity(0),
@@ -18,10 +21,23 @@ public enum AirportLocations
 	{
 		this.locationVal = locationVal;
 	}
+	
+	/**
+	 * Gets integer id of location.
+	 * 
+	 * @return			Integer representation of location id
+	 */
 	public int getLocationVal()
 	{
 		return locationVal;
 	}
+	
+	/**
+	 * Converts provided integer location id to actual location enumerator value.
+	 * 
+	 * @param value		An integer value to match against location id values.
+	 * @return			An AirportLocation value that corresponds to provided integer id
+	 */
 	public static AirportLocations getAirportLocations(int value)
 	{
 		for(AirportLocations locations : AirportLocations.values())
