@@ -13,7 +13,7 @@ import java.util.ArrayList;
 class AirlineManagerSingletonTest {
 	
 	@Test
-	void testGetInstance() {
+	public void testGetInstance() {
 		// GEt instance 
 		AirlineManagerSingleton instance1 = AirlineManagerSingleton.getInstance();
 		
@@ -155,6 +155,17 @@ class AirlineManagerSingletonTest {
 		
 		assertTrue(testManager.viewAccountInformation(testValidAccount.getUsername()));
 		assertFalse(testManager.viewAccountInformation(testInvalidAccount.getUsername()));
+		
+		
+	}
+	
+	
+	@Test
+	void testRandomFlight(){
+		AirlineManagerSingleton testManager = AirlineManagerSingleton.getInstance();
+		
+		testManager.generateRandomFlights();
+		assertNotNull(testManager.generateRandomFlights());
 		
 		
 	}

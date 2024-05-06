@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import accounts.AccountStatus;
 import accounts.UserAccounts;
+import flights.PlanePsuedoFactory;
 import seatSelection.Seat;
 import seatSelection.SeatType;
 
@@ -42,6 +43,8 @@ public class SeatTest {
 		seat.setAvailable(true);
 		assertTrue(seat.isAvailable(),"Seat should be available");
 	}
+	
+
 
 	
 	
