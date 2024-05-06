@@ -562,7 +562,7 @@ public class AirlineManagerSingleton {
 	 * @param username		Username of account canceling flight
 	 * @return				Success or failure of cancellation
 	 */
-	boolean cancelFlightReservation(int flightNumber, String username) 
+	public boolean cancelFlightReservation(int flightNumber, String username) 
 	{
 		UserAccounts account = this.locateByUsername(username); //locate account based off username
 		if(account == null || account.getBookedFlights().isEmpty())
@@ -601,7 +601,7 @@ public class AirlineManagerSingleton {
 	 * @param flightNumber Flight identification number
 	 * @return Flight object that matches the given flight identification number
 	 */
-	private Flight findFlightByNumber(int flightNumber) 
+	public Flight findFlightByNumber(int flightNumber) 
 	{
 	    for (Flight flight : this.allFlights) //search the master flight list called allFlights
 	    {
@@ -619,7 +619,7 @@ public class AirlineManagerSingleton {
 	 * @param membershipLevel Takes an instance of the AccountStatus enum attached to a given UserAccount
 	 * @return An integer to determine point deduction
 	 */
-	private int determinePointsToDeduct(AccountStatus membershipLevel)
+	public int determinePointsToDeduct(AccountStatus membershipLevel)
 	{
 	    switch (membershipLevel) //based on the membership level of the UserAccount deduct points for canceling a flight
 	    {
@@ -631,13 +631,9 @@ public class AirlineManagerSingleton {
 	        {
 	            return 50;
 	        }
-	        case IRON:
-	        {
-	            return 25;
-	        }
 	        default:
 	        {
-	            return 0;
+	            return 25;
 	        }
 	    }
 	}
@@ -747,12 +743,17 @@ public class AirlineManagerSingleton {
 	/**
 	 * Lists all flights.
 	 */
-	public void viewAvailableFlights()
+	public boolean viewAvailableFlights()
 	{
-		for(Flight flight : allFlights)
+		if(allFlights != null)
 		{
-			System.out.println(flight.toString());
+			for(Flight flight : allFlights)
+			{
+				System.out.println(flight.toString());
+			}
+			return true;
 		}
+		return false;
 	}
 	
 	/**
@@ -772,26 +773,31 @@ public class AirlineManagerSingleton {
 	 * Lists seat information for a given flight
 	 * @param searchFlightNumber	The flight to list seats for
 	 */
-	public void viewPlaneSeats(int searchFlightNumber)
+	public boolean viewPlaneSeats(int searchFlightNumber)
 	{
-		for(Flight flight : allFlights)
+		if(allFlights != null)
 		{
-			if(flight.flightNumber  == searchFlightNumber)
+			for(Flight flight : allFlights)
 			{
-				for(Seat seat : flight.getAllSeats(SeatType.FIRST_CLASS))
+				if(flight.flightNumber  == searchFlightNumber)
 				{
-					System.out.println(seat.toString());
-				}
-				for(Seat seat : flight.getAllSeats(SeatType.COMFORT))
-				{
-					System.out.println(seat.toString());
-				}
-				for(Seat seat : flight.getAllSeats(SeatType.ECONOMY))
-				{
-					System.out.println(seat.toString());
+					for(Seat seat : flight.getAllSeats(SeatType.FIRST_CLASS))
+					{
+						System.out.println(seat.toString());
+					}
+					for(Seat seat : flight.getAllSeats(SeatType.COMFORT))
+					{
+						System.out.println(seat.toString());
+					}
+					for(Seat seat : flight.getAllSeats(SeatType.ECONOMY))
+					{
+						System.out.println(seat.toString());
+					}
 				}
 			}
+			return true;
 		}
+		return false;
 	}
 	
 	
@@ -812,8 +818,11 @@ public class AirlineManagerSingleton {
 			user.setMembershipLevel(AccountStatus.GOLD);
 			user.setUserPoints(points-500);
 			return true;
-		} else {
-			return false;
+		} else if (points <= 500 && membership == AccountStatus.IRON){
+			user.setMembershipLevel(AccountStatus.IRON);
+			user.setUserPoints(points);
+			return true;
 		}
+		return false;
 	}
 }

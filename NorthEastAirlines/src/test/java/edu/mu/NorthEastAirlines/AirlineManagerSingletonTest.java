@@ -170,22 +170,86 @@ class AirlineManagerSingletonTest {
 		
 	}
 	
-
+	
 	@Test
-	void testBookFlight()
+	void testBookFlightTrue()
 	{
 		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
-		UserAccounts acct1 = testALM.createAccount("Acct1", "ABCD", "Joe", "Smith");
-		testALM.addFlightsToMasterList(3);
-		assertTrue(testALM.bookFlight(acct1));
+		UserAccounts acct1 = testALM.createAccount("Acct1", "ABC", "Joe", "Smith");
+		acct1.setMembershipLevel(AccountStatus.EMERALD);
+		UserAccounts acct2 = testALM.createAccount("Acct2", "DEF", "John", "Smith");
+		acct2.setMembershipLevel(AccountStatus.GOLD);
+		UserAccounts acct3 = testALM.createAccount("Acct3", "GHI", "Jane", "Smith");
+		acct3.setMembershipLevel(AccountStatus.IRON);
+		testALM.addFlightsToMasterList(1);
+		assertTrue(testALM.bookFlight(acct1)); //choose a first class seat
+		assertTrue(testALM.bookFlight(acct2)); //choose a comfort seat
+		assertTrue(testALM.bookFlight(acct3)); //choose a economy seat
 	}
 	
 	@Test 
-	void testFalseBookFlight()
+	void testBookFlightFalse()
 	{
 		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
 		UserAccounts acct1 = null;
-		testALM.addFlightsToMasterList(3);
+		testALM.addFlightsToMasterList(1);
 		assertFalse(testALM.bookFlight(acct1));
+	}
+	
+	@Test 
+	void deductPointsTrue()
+	{
+		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
+		int emeraldCase = testALM.determinePointsToDeduct(AccountStatus.EMERALD);
+		int goldCase = testALM.determinePointsToDeduct(AccountStatus.GOLD);
+		int ironCase = testALM.determinePointsToDeduct(AccountStatus.IRON);
+		assertEquals(100, emeraldCase);
+		assertEquals(50, goldCase);
+		assertEquals(25, ironCase);
+	}
+	
+	@Test
+	void viewAvailableFlightsTrue()
+	{
+		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
+		assertTrue(testALM.viewAvailableFlights());
+	}
+	
+	@Test
+	void viewAvailableSeatsTrue()
+	{
+		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
+		testALM.addFlightsToMasterList(1);
+		assertTrue(testALM.viewPlaneSeats(0));
+	}
+	
+	@Test
+	void changeMembershipLevelTrue()
+	{
+		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
+		UserAccounts fakeAccount1 = testALM.createAccount("fake1", "ABC", "Joe", "Smith");
+		fakeAccount1.setMembershipLevel(AccountStatus.IRON);
+		fakeAccount1.setUserPoints(1200);
+		assertTrue(testALM.changeMembershipLevel(fakeAccount1, AccountStatus.GOLD));
+		
+		UserAccounts fakeAccount2 = testALM.createAccount("fake2", "ABC", "Joe", "Smith");
+		fakeAccount2.setMembershipLevel(AccountStatus.IRON);
+		fakeAccount2.setUserPoints(1200);
+		assertTrue(testALM.changeMembershipLevel(fakeAccount2, AccountStatus.EMERALD));
+		
+		UserAccounts fakeAccount3 = testALM.createAccount("fake3", "GHI", "Jane", "Smith");
+		fakeAccount3.setMembershipLevel(AccountStatus.IRON);
+		fakeAccount3.setUserPoints(350);
+		assertTrue(testALM.changeMembershipLevel(fakeAccount3, AccountStatus.IRON));
+	}
+	
+	@Test 
+	void cancelFlightTrue()
+	{
+		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
+		UserAccounts jokeAccount = testALM.createAccount("joke1", "ABC", "Joe", "Smith");
+		testALM.addFlightsToMasterList(1);
+		testALM.bookFlight(jokeAccount);
+		assertTrue(testALM.cancelFlightReservation(jokeAccount.getBookedFlights().get(0).getFlight(), "Acct1"));
 	}
 }
