@@ -156,7 +156,6 @@ class AirlineManagerSingletonTest {
 		assertTrue(testManager.viewAccountInformation(testValidAccount.getUsername()));
 		assertFalse(testManager.viewAccountInformation(testInvalidAccount.getUsername()));
 		
-		
 	}
 	
 	
@@ -166,8 +165,6 @@ class AirlineManagerSingletonTest {
 		
 		testManager.generateRandomFlights();
 		assertNotNull(testManager.generateRandomFlights());
-		
-		
 	}
 	
 	
@@ -197,7 +194,7 @@ class AirlineManagerSingletonTest {
 	}
 	
 	@Test 
-	void deductPointsTrue()
+	void testDeductPointsTrue()
 	{
 		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
 		int emeraldCase = testALM.determinePointsToDeduct(AccountStatus.EMERALD);
@@ -209,14 +206,14 @@ class AirlineManagerSingletonTest {
 	}
 	
 	@Test
-	void viewAvailableFlightsTrue()
+	void testViewAvailableFlightsTrue()
 	{
 		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
 		assertTrue(testALM.viewAvailableFlights());
 	}
 	
 	@Test
-	void viewAvailableSeatsTrue()
+	void testViewAvailableSeatsTrue()
 	{
 		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
 		testALM.addFlightsToMasterList(1);
@@ -224,7 +221,7 @@ class AirlineManagerSingletonTest {
 	}
 	
 	@Test
-	void changeMembershipLevelTrue()
+	void testChangeMembershipLevelTrue()
 	{
 		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
 		UserAccounts fakeAccount1 = testALM.createAccount("fake1", "ABC", "Joe", "Smith");
@@ -244,12 +241,33 @@ class AirlineManagerSingletonTest {
 	}
 	
 	@Test 
-	void cancelFlightTrue()
+	void testCancelFlightTrue()
 	{
 		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
 		UserAccounts jokeAccount = testALM.createAccount("joke1", "ABC", "Joe", "Smith");
 		testALM.addFlightsToMasterList(1);
 		testALM.bookFlight(jokeAccount);
-		assertTrue(testALM.cancelFlightReservation(jokeAccount.getBookedFlights().get(0).getFlight(), "Acct1"));
+		assertTrue(testALM.cancelFlightReservation(jokeAccount.getBookedFlights().get(0).getFlight(), "joke1"));
+	}
+	
+	@Test 
+	void testChangePasswordFalse()
+	{
+		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
+		UserAccounts jokeAccount1 = testALM.createAccount("joke2", "ABC", "Joe", "Smith");
+		assertFalse(testALM.changePassword("joke2", "ABC", "DEF"));
+	}
+	
+	
+	
+	@Test 
+	void testChangePasswordTrue()
+	{
+		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
+		UserAccounts changePasswordAccount = testALM.createAccount("changePass", "123", "Mike", "Smith");
+		
+		testALM.login("changePass", "123");
+		boolean result = testALM.changePassword("changePass", "123", "456");
+		assertTrue(result);
 	}
 }

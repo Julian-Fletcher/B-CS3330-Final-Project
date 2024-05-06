@@ -499,27 +499,22 @@ public class AirlineManagerSingleton {
 	 */
 	public boolean changePassword(String username, String password, String newPassword)
 	{
-		for(UserAccounts acct : allAccounts) //search for the account with the given username
+		UserAccounts account = this.locateByUsername(username);//search for the account with the given username
+		if(account.getLoginStatus() == true) //check if they are logged in
 		{
-			if(acct.getUsername() == username)
+			try 
 			{
-				if(acct.getLoginStatus() == true) //check if they are logged in
-				{
-					try 
-					{
-						acct.setPassword(hashPassword(newPassword)); //set new password if already logged in
-					} 
-					catch (NoSuchAlgorithmException e) 
-					{
-						e.printStackTrace();
-					}
-				}
-			}
-			else 
+				account.setPassword(hashPassword(newPassword)); //set new password if already logged in
+			} 
+			catch (NoSuchAlgorithmException e) 
 			{
-				login(username, newPassword); //try to log in if previously hadn't
-				return false;
-			}
+				e.printStackTrace();
+			}	
+		}
+		else 
+		{
+			login(username, newPassword); //try to log in if previously hadn't
+			return false;
 		}
 		return true;
 	}
