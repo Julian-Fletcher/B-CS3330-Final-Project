@@ -44,5 +44,5 @@ public interface SeatSelectionStrategy {
 	 * @param flight	The flight object
 	 * @param index		The seat number
 	 */
-	public void changeAvailablityToFalse(Flight flight, int index);
+//	public void changeAvailablityToFalse(Flight flight, int index);
 }

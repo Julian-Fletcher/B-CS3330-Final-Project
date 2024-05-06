@@ -17,6 +17,8 @@ public enum AirportLocations
 	SanJose(9);
 	
 	final int locationVal;
+	
+	
 	AirportLocations(int locationVal) 
 	{
 		this.locationVal = locationVal;

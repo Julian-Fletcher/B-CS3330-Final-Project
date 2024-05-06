@@ -22,7 +22,9 @@ public class PlanePsuedoFactory {
 	private static PlanePsuedoFactory instance = null;		// Only one!
 
 	
-	
+	/**
+	 * Constructor
+	 */
 	public PlanePsuedoFactory() {
 	
 	}

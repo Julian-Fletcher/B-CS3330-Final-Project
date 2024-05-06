@@ -13,56 +13,58 @@ public class PlaneObject {
 	private ArrayList<Seat> seats;
 	private PlaneType model;
 	
-	
+	/**
+	 * Constructor.
+	 */
 	public PlaneObject() {
 		this.seats = new ArrayList<Seat>();
 
 	}
 	
-	/**
-	 * Gets all economy seats that belong to PlaneObject.
-	 * 
-	 * @return			An ArrayList<Seat> of all economy seats in the PlaneObject
-	 */
-	public ArrayList<Seat> getEconomySeats() {
-		ArrayList<Seat> narrowseats = new ArrayList<Seat>();
-		for(Seat seat : this.seats) {
-			if(seat.getSeatType() == SeatType.ECONOMY) {
-				narrowseats.add(seat);
-			}
-		}
-		return narrowseats;
-	}
-	
-	/**
-	 * Gets all comfort seats that belong to PlaneObject.
-	 * 
-	 * @return			An ArrayList<Seat> of all comfort seats in the PlaneObject
-	 */
-	public ArrayList<Seat> getComfortSeats() {
-		ArrayList<Seat> narrowseats = new ArrayList<Seat>();
-		for(Seat seat : this.seats) {
-			if(seat.getSeatType() == SeatType.COMFORT) {
-				narrowseats.add(seat);
-			}
-		}
-		return narrowseats;
-	}
-	
-	/**
-	 * Gets all first class seats that belong to PlaneObject.
-	 * 
-	 * @return			An ArrayList<Seat> of all first class seats in the PlaneObject
-	 */
-	public ArrayList<Seat> getFirstClassSeats() {
-		ArrayList<Seat> narrowseats = new ArrayList<Seat>();
-		for(Seat seat : this.seats) {
-			if(seat.getSeatType() == SeatType.FIRST_CLASS) {
-				narrowseats.add(seat);
-			}
-		}
-		return narrowseats;
-	}
+//	/**
+//	 * Gets all economy seats that belong to PlaneObject.
+//	 * 
+//	 * @return			An ArrayList<Seat> of all economy seats in the PlaneObject
+//	 */
+//	public ArrayList<Seat> getEconomySeats() {
+//		ArrayList<Seat> narrowseats = new ArrayList<Seat>();
+//		for(Seat seat : this.seats) {
+//			if(seat.getSeatType() == SeatType.ECONOMY) {
+//				narrowseats.add(seat);
+//			}
+//		}
+//		return narrowseats;
+//	}
+//	
+//	/**
+//	 * Gets all comfort seats that belong to PlaneObject.
+//	 * 
+//	 * @return			An ArrayList<Seat> of all comfort seats in the PlaneObject
+//	 */
+//	public ArrayList<Seat> getComfortSeats() {
+//		ArrayList<Seat> narrowseats = new ArrayList<Seat>();
+//		for(Seat seat : this.seats) {
+//			if(seat.getSeatType() == SeatType.COMFORT) {
+//				narrowseats.add(seat);
+//			}
+//		}
+//		return narrowseats;
+//	}
+//	
+//	/**
+//	 * Gets all first class seats that belong to PlaneObject.
+//	 * 
+//	 * @return			An ArrayList<Seat> of all first class seats in the PlaneObject
+//	 */
+//	public ArrayList<Seat> getFirstClassSeats() {
+//		ArrayList<Seat> narrowseats = new ArrayList<Seat>();
+//		for(Seat seat : this.seats) {
+//			if(seat.getSeatType() == SeatType.FIRST_CLASS) {
+//				narrowseats.add(seat);
+//			}
+//		}
+//		return narrowseats;
+//	}
 	
 	/**
 	 * Gets the PlaneType of the PlaneObject.

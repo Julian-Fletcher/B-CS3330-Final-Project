@@ -6,8 +6,17 @@ package flights;
  */
 public enum PlaneType {
 	
+	/**
+	 * Largest plane size.
+	 */
 	LARGE_PLANE(0),
+	/**
+	 * Second largest plane size.
+	 */
 	MEDIUM_PLANE(1),
+	/**
+	 * Smallest plane size.
+	 */
 	SMALL_PLANE(2);
 	
 	
@@ -35,15 +44,15 @@ public enum PlaneType {
 	 * @param planeVal	An integer value
 	 * @return			A PlaneType corresponding to inputed integer value
 	 */
-	public static PlaneType getPlaneType(int planeVal)
-	{
-		for(PlaneType planes : PlaneType.values())
-		{
-			if(planes.getPlaneVal() == planeVal)
-			{
-				return planes;
-			}
-		}
-		return null;
-	}
+//	public static PlaneType getPlaneType(int planeVal)
+//	{
+//		for(PlaneType planes : PlaneType.values())
+//		{
+//			if(planes.getPlaneVal() == planeVal)
+//			{
+//				return planes;
+//			}
+//		}
+//		return null;
+//	}
 }

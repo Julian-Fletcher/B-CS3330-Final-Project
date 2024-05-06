@@ -92,16 +92,16 @@ public class IronSeatSelection implements SeatSelectionStrategy{
 		
 	}
 
-	
-	/**
-	 * Sets a seat availability to false.
-	 * 
-	 * @param flight	The flight object
-	 * @param index		The seat number
-	 */
-	@Override
-	public void changeAvailablityToFalse(Flight flight, int index) 
-	{
-		flight.changeSeatAvailabilityToFalse(viewAvailableSeats(flight).get(index));
-	}
+//	
+//	/**
+//	 * Sets a seat availability to false.
+//	 * 
+//	 * @param flight	The flight object
+//	 * @param index		The seat number
+//	 */
+//	@Override
+//	public void changeAvailablityToFalse(Flight flight, int index) 
+//	{
+//		flight.changeSeatAvailabilityToFalse(viewAvailableSeats(flight).get(index));
+//	}
 }

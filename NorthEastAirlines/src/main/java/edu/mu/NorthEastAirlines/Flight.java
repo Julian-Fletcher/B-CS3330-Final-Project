@@ -21,6 +21,18 @@ public class Flight {
 	int flightNumber;
 	PlaneObject planeObject;
 	
+	/**
+	 * Flight constructor. 
+	 * 
+	 * Creates a flight object with the provided information.
+	 * 
+	 * @param departureLocation	Airport object the plane is leaving from
+	 * @param arrivalLocation	Airport object the plane is going to
+	 * @param departureTime		LocalDateTime object of departure time
+	 * @param arrivalTime		LocalDateTime object of arrival time	
+	 * @param flightNumber		Flight number
+	 * @param planeObject		Plane object of a plane
+	 */
 	public Flight(Airport departureLocation, Airport arrivalLocation, LocalDateTime departureTime,
 			LocalDateTime arrivalTime, int flightNumber, PlaneObject planeObject) {
 		super();
@@ -207,6 +219,7 @@ public class Flight {
 	
 	/***
 	 * Searches for seat object.
+	 * <p>
 	 * Using the provided seatNumber and seatType, this method returns an instance 
 	 * of the desired object on completion and returns null on failure
 	 * 

@@ -1,13 +1,18 @@
 package edu.mu.NorthEastAirlines;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import accounts.AccountStatus;
 import accounts.UserAccounts;
+import flights.PlaneType;
+import seatSelection.SeatSelectionStrategy;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 
 class AirlineManagerSingletonTest {
@@ -270,4 +275,16 @@ class AirlineManagerSingletonTest {
 		boolean result = testALM.changePassword("changePass", "123", "456");
 		assertTrue(result);
 	}
+	
+	@Test
+	void testUpdatePoints() {
+		AirlineManagerSingleton sl = AirlineManagerSingleton.getInstance();
+		UserAccounts account =	sl.createAccount("a", "ab", "abc", "abcd");
+		
+		assertTrue(account.updatePoints(10));
+		assertFalse(account.updatePoints(-10));
+	}
+	
+
+	
 }
