@@ -530,11 +530,7 @@ public class AirlineManagerSingleton {
 	 * @param password	Password of account
 	 * @return			Result of update - true or false
 	 */
-	public boolean changeMembershipLevel(String username, String password)
-	{
-		return false;
-	}
-	
+
 	/* *************** ACCOUNT MANAGEMENT METHODS END HERE ***************  */
 	
 	
@@ -565,19 +561,70 @@ public class AirlineManagerSingleton {
 	 * @param username		Username of account canceling flight
 	 * @return				Success or failure of cancellation
 	 */
-	boolean cancelFlightReservation(int flightNumber, String username) {
-		// Get account
+	boolean cancelFlightReservation(int flightNumber, String username) 
+	{
 		UserAccounts account = this.locateByUsername(username);
-		if(account == null) {
+		if(account == null || account.getBookedFlights().isEmpty())
+		{
 			return false;
 		}
 		
-//		for(Flight flight : this.allFlights) {
-//			if(flight.getFlightNumber() == flightNumber) {
-//				
-//			}
-//		}
-		return true;
+		for(Iterator<UserFlightData> iterator = account.getBookedFlights().iterator(); iterator.hasNext();)
+		{
+			UserFlightData data = iterator.next();
+			if(data.getFlight() == flightNumber)
+			{
+				Flight flight = findFlightByNumber(flightNumber);
+				if(flight != null)
+				{
+					Seat cancelSeat = flight.getSeatByNumber(data.getSeat(), data.getSeatType());
+					if(cancelSeat != null)
+					{
+						flight.changeSeatAvailabilityToTrue(cancelSeat);
+					}
+				}
+			}
+			System.out.println(data.getSeatType().name() + " seat: " + data.getSeat() + " has been canceled!!!");
+			iterator.remove();
+			int deduction = determinePointsToDeduct(account.getMembershipLevel());
+			account.setUserPoints(account.getUserPoints() - deduction);
+			return true;
+		}
+		return false;
+	}
+	
+	private Flight findFlightByNumber(int flightNumber) 
+	{
+	    for (Flight flight : this.allFlights) 
+	    {
+	        if (flight.getFlightNumber() == flightNumber) 
+	        {
+	            return flight;
+	        }
+	    }
+	    return null;
+	}
+	private int determinePointsToDeduct(AccountStatus membershipLevel)
+	{
+	    switch (membershipLevel)
+	    {
+	        case EMERALD:
+	        {
+	            return 200;
+	        }
+	        case GOLD:
+	        {
+	            return 100;
+	        }
+	        case IRON:
+	        {
+	            return 50;
+	        }
+	        default:
+	        {
+	            return 0;
+	        }
+	    }
 	}
 	
 	/* *************** BOOK FLIGHT METEHOD STARTS HERE ***************  */
@@ -750,10 +797,5 @@ public class AirlineManagerSingleton {
 		} else {
 			return false;
 		}
-		
-		
-		
 	}
-		
-	
 }

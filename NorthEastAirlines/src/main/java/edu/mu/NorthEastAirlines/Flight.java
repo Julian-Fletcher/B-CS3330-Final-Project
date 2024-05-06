@@ -131,6 +131,17 @@ public class Flight {
 	}
 
 	/**
+	 * Changes the availability of a seat to availiable (true)
+	 * 
+	 * 
+	 * @param seat		A Seat that will have its availability changed
+	 */
+	public void changeSeatAvailabilityToTrue(Seat seat)
+	{
+		seat.setAvailable(true);
+	}
+	
+	/**
 	 * Changes the availability of a seat to occupied (false)
 	 * 
 	 * 
@@ -192,5 +203,26 @@ public class Flight {
 		return "Flight [departureLocation=" + departureLocation.city + ", arrivalLocation=" + arrivalLocation.city
 				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", flightNumber=" + flightNumber
 				+ ", planeType=" + planeObject.getModel().name() + "]";
+	}
+	
+	/***
+	 * Searches for seat object.
+	 * Using the provided seatNumber and seatType, this method returns an instance 
+	 * of the desired object on completion and returns null on failure
+	 * 
+	 * @param seatNumber Interger attached to the Seat object for identification
+	 * @param seatType	An enum attached to different levels of membership seating
+	 * @return Instance of a Seat object with the given seatNumber and seatType
+	 */
+	public Seat getSeatByNumber(int seatNumber, SeatType seatType)
+	{
+		for(Seat seat : getAllSeats(seatType))
+		{
+			if(seat.getSeatNumber() == seatNumber)
+			{
+				return seat;
+			}
+		}
+		return null;
 	}
 }

@@ -25,13 +25,15 @@ public class Main {
 		System.out.println("Viewing Account information");
 		alm.viewAccountInformation("test1");
 		
-		/*
+		
 		alm.addFlightsToMasterList(4);
-		//alm.viewPlaneSeats(1);
+	
 		
 		System.out.println("*** Booking Flight *** \n\n");
 		boolean book1 = alm.bookFlight(acct1);
 		System.out.print("\nBooked Flight Details for: " + acct1.getFirstName() + "\n");
+		
+		alm.viewPlaneSeats(0);
 		for(UserFlightData data: acct1.getBookedFlights())
 		{
 			System.out.println("Flight Number: " + data.getFlight());
@@ -42,7 +44,7 @@ public class Main {
 		//alm.viewPlaneSeats(1);
 		//alm.viewAvailableFlights();
 		System.out.println("Membership Level: " + acct1.getMembershipLevel());
-		*/
+		
 		
 		String username = "test1";
 		String password = "password";
@@ -52,8 +54,9 @@ public class Main {
 		alm.logout(username, password);
 		alm.logout(username, newPassword);
 		
-		
-		
+		alm.cancelFlightReservation(0, username);
+		alm.viewPlaneSeats(0);
+		System.out.println("User Points: " + acct1.getUserPoints());
 		
 		/*
 		 * Demo psedocode
