@@ -499,15 +499,15 @@ public class AirlineManagerSingleton {
 	 */
 	public boolean changePassword(String username, String password, String newPassword)
 	{
-		for(UserAccounts acct : allAccounts)
+		for(UserAccounts acct : allAccounts) //search for the account with the given username
 		{
 			if(acct.getUsername() == username)
 			{
-				if(acct.getLoginStatus() == true)
+				if(acct.getLoginStatus() == true) //check if they are logged in
 				{
 					try 
 					{
-						acct.setPassword(hashPassword(newPassword));
+						acct.setPassword(hashPassword(newPassword)); //set new password if already logged in
 					} 
 					catch (NoSuchAlgorithmException e) 
 					{
@@ -517,6 +517,7 @@ public class AirlineManagerSingleton {
 			}
 			else 
 			{
+				login(username, newPassword); //try to log in if previously hadn't
 				return false;
 			}
 		}
@@ -563,62 +564,76 @@ public class AirlineManagerSingleton {
 	 */
 	boolean cancelFlightReservation(int flightNumber, String username) 
 	{
-		UserAccounts account = this.locateByUsername(username);
+		UserAccounts account = this.locateByUsername(username); //locate account based off username
 		if(account == null || account.getBookedFlights().isEmpty())
 		{
 			return false;
 		}
 		
-		for(Iterator<UserFlightData> iterator = account.getBookedFlights().iterator(); iterator.hasNext();)
+		for(Iterator<UserFlightData> iterator = account.getBookedFlights().iterator(); iterator.hasNext();) //create an iterator to search through the getBookedFlight list
 		{
 			UserFlightData data = iterator.next();
-			if(data.getFlight() == flightNumber)
+			if(data.getFlight() == flightNumber) //find the correct flight based off the given flightNumber
 			{
 				Flight flight = findFlightByNumber(flightNumber);
 				if(flight != null)
 				{
-					Seat cancelSeat = flight.getSeatByNumber(data.getSeat(), data.getSeatType());
+					Seat cancelSeat = flight.getSeatByNumber(data.getSeat(), data.getSeatType()); 
 					if(cancelSeat != null)
 					{
-						flight.changeSeatAvailabilityToTrue(cancelSeat);
+						flight.changeSeatAvailabilityToTrue(cancelSeat);//if the flight was found change seat availability to available (true)
 					}
+					System.out.println(data.getSeatType().name() + " seat: " + data.getSeat() + " has been canceled!!!"); //display message that a seat has been canceled
+					int deduction = determinePointsToDeduct(account.getMembershipLevel()); //calculate point deduction
+					account.setUserPoints(account.getUserPoints() - deduction); //deduct points for cancelling flight
 				}
 			}
-			System.out.println(data.getSeatType().name() + " seat: " + data.getSeat() + " has been canceled!!!");
 			iterator.remove();
-			int deduction = determinePointsToDeduct(account.getMembershipLevel());
-			account.setUserPoints(account.getUserPoints() - deduction);
 			return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * Searches for a specific flight from the allFlights master ArrayList 
+	 * and returns the flight with the matching flight number on success or null on failure
+	 * 
+	 * @param flightNumber Flight identification number
+	 * @return Flight object that matches the given flight identification number
+	 */
 	private Flight findFlightByNumber(int flightNumber) 
 	{
-	    for (Flight flight : this.allFlights) 
+	    for (Flight flight : this.allFlights) //search the master flight list called allFlights
 	    {
 	        if (flight.getFlightNumber() == flightNumber) 
 	        {
-	            return flight;
+	            return flight; //on success return the flight with the matching flight id number
 	        }
 	    }
-	    return null;
+	    return null; // on failure return null
 	}
+	
+	/**
+	 * Calculates the number of points that will be lost after canceling a flight at specific membership levels
+	 * 
+	 * @param membershipLevel Takes an instance of the AccountStatus enum attached to a given UserAccount
+	 * @return An integer to determine point deduction
+	 */
 	private int determinePointsToDeduct(AccountStatus membershipLevel)
 	{
-	    switch (membershipLevel)
+	    switch (membershipLevel) //based on the membership level of the UserAccount deduct points for canceling a flight
 	    {
 	        case EMERALD:
 	        {
-	            return 200;
+	            return 100;
 	        }
 	        case GOLD:
 	        {
-	            return 100;
+	            return 50;
 	        }
 	        case IRON:
 	        {
-	            return 50;
+	            return 25;
 	        }
 	        default:
 	        {
@@ -641,8 +656,12 @@ public class AirlineManagerSingleton {
 	 */
 	public boolean bookFlight(UserAccounts account) 
 	{
-		Flight flight = viewPotentialFlights();
-		if(account.getMembershipLevel() == AccountStatus.EMERALD) 
+		if(account == null)
+		{
+			return false;
+		}
+		Flight flight = viewPotentialFlights(); //choose a desired flight
+		if(account.getMembershipLevel() == AccountStatus.EMERALD) //Based on membershiplevel invoke different seat selection strategies
 		{
 			EmeraldSeatSelection select = new EmeraldSeatSelection();
 			int newSeat = select.selectSeat(flight, account.getMembershipLevel());
@@ -662,7 +681,7 @@ public class AirlineManagerSingleton {
 			System.out.println("Updated points: " + account.getUserPoints() + " points");
 			return true;
 		}
-		if(account.getMembershipLevel() == AccountStatus.GOLD) 
+		if(account.getMembershipLevel() == AccountStatus.GOLD) //Based on membershiplevel invoke different seat selection strategies
 		{
 			GoldSeatSelection select = new GoldSeatSelection();
 			int newSeat = select.selectSeat(flight, account.getMembershipLevel());
@@ -682,7 +701,7 @@ public class AirlineManagerSingleton {
 			System.out.println("Updated points: " + account.getUserPoints() + " points");
 			return true;
 		}
-		if(account.getMembershipLevel() == AccountStatus.IRON) 
+		if(account.getMembershipLevel() == AccountStatus.IRON) //Based on membershiplevel invoke different seat selection strategies
 		{
 			IronSeatSelection select = new IronSeatSelection();
 			int newSeat = select.selectSeat(flight, account.getMembershipLevel());
@@ -712,17 +731,16 @@ public class AirlineManagerSingleton {
 	 */
 	protected Flight viewPotentialFlights()
 	{	
-		Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in); 
 		int selectedFlight;
 		
 		for(Flight flight : allFlights)
 		{
-			System.out.println("Flight Num: " + flight.flightNumber + ". To: " + flight.departureLocation.city);
+			System.out.println("Flight Num: " + flight.flightNumber + ".\nTo: " + flight.arrivalLocation.city + " From: " + flight.departureLocation.city); //display critical information about the flights available
 		}
 		
-		System.out.print("Select a Flight Number: ");
+		System.out.print("Select a Flight Number: "); //ask for user input on what flight they want
 		selectedFlight = scan.nextInt();
-		//scan.close();
 		return allFlights.get(selectedFlight);
 	}
 	

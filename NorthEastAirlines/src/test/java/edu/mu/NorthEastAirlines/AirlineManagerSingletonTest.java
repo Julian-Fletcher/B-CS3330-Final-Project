@@ -170,8 +170,22 @@ class AirlineManagerSingletonTest {
 		
 	}
 	
-//	
-//	public void testBookSeat() {
-//		
-//	}
+
+	@Test
+	void testBookFlight()
+	{
+		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
+		UserAccounts acct1 = testALM.createAccount("Acct1", "ABCD", "Joe", "Smith");
+		testALM.addFlightsToMasterList(3);
+		assertTrue(testALM.bookFlight(acct1));
+	}
+	
+	@Test 
+	void testFalseBookFlight()
+	{
+		AirlineManagerSingleton testALM = AirlineManagerSingleton.getInstance();
+		UserAccounts acct1 = null;
+		testALM.addFlightsToMasterList(3);
+		assertFalse(testALM.bookFlight(acct1));
+	}
 }
