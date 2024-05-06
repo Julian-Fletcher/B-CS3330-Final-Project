@@ -83,7 +83,11 @@ public class UserAccounts
 				+ membershipLevel + ", firstName=" + firstName + ", lastName=" + lastName + ", bookedFlights="
 				+ bookedFlights + ", isLoggedIn=" + isLoggedIn + ", points=" + points + "]";
 	}
-	// Access login status
+
+	/**
+	 * Gets the login status of an account.
+	 * @return	The login status of the account (true or false)
+	 */
 	public boolean getLoginStatus() {
 		if(this.isLoggedIn == true) {
 			return true;
@@ -91,7 +95,11 @@ public class UserAccounts
 		return false;
 	}
 	
-	// Set the login status
+	/**
+	 * Update the login status of an account.
+	 * @param value The new login status
+	 * @return True
+	 */
 	public boolean setLoginStatus(boolean value) {
 		this.isLoggedIn = value;
 		return true;	// Returns true always cause it should never fail!!

@@ -36,7 +36,7 @@ import seatSelection.SeatType;
  * only one manager should exist at a time. It contains account and fight management methods.
  */
 public class AirlineManagerSingleton {
-
+	
 	private String adminPassword;
 	private ArrayList<UserAccounts> allAccounts = new ArrayList<>();
 	private ArrayList<Flight> allFlights = new ArrayList<>();
@@ -47,15 +47,17 @@ public class AirlineManagerSingleton {
 	private static AirlineManagerSingleton instance = null;		// Only one!
 	private SeatSelectionStrategy strategy;	// SeatSelectionStrategy
 	
-	
+	/**
+	 * Default constructor.
+	 */
 	public AirlineManagerSingleton() {
 	
 	}
 	
-	// Singleton initalizer. Only allows one!!
-	// Does not yet make admin account!
+
 	/**
 	 * Initializes one instance of the AirlineManagerSingleton.
+	 * <p>
 	 * The singleton is returned to the user to access other core functionality. 
 	 * Prevents multiple objects from being instantiated, if the user
 	 * attempts to create multiple, the same object will be returned each time. 
@@ -71,6 +73,11 @@ public class AirlineManagerSingleton {
 	}
 	
 	//*********************** GENERATE RANDOM FLIGHT STARTS HERE *************************************
+	/**
+	 * Creates a random flight object and adds it to the master flight ArrayList.
+	 * 
+	 * @return	Boolean value of whether the flight was successfully added or not
+	 */
 	public boolean generateRandomFlights()
 	{
 		Airport arriveAirport = new Airport();
@@ -117,6 +124,10 @@ public class AirlineManagerSingleton {
 		return true;
 	}
 
+	/**
+	 * Generates a random string to be used as an airport code.
+	 * @return	The generated string
+	 */
 	private String randomAirportCode()
 	{
 		Random random = new Random();
@@ -129,6 +140,10 @@ public class AirlineManagerSingleton {
 		return sb.toString();
 	}
 	
+	/**
+	 * Generates a random integer to select an airport location.
+	 * @return	The random integer
+	 */
 	private int randomAirportLocation()
 	{
 		int maxLocations = 10;
@@ -136,6 +151,10 @@ public class AirlineManagerSingleton {
 		return random.nextInt(maxLocations);
 	}
 	
+	/**
+	 * Generates a random LocalDateTime object to be used for flight departure and arrival time.
+	 * @return	LocalDateTime object
+	 */
 	private LocalDateTime randomLocalDateTime()
 	{
 		 Random random = new Random();
@@ -152,7 +171,12 @@ public class AirlineManagerSingleton {
 	
 	//*********************** GENERATE RANDOM FLIGHT ENDS HERE *************************************
 	
-	/* Little management methods~*/
+	/**
+	 * Increments or decrements the account index variable.
+	 *  
+	 * @param update	1 to increment. 2 to decrement
+	 * @return			Returns true if inc or dec. Returns false if an invalid parameter passed
+	 */
 	private boolean updateAccountIndex(int update) {
 		switch (update){
 		case 1:
@@ -169,8 +193,6 @@ public class AirlineManagerSingleton {
 	
 	/* *************** ACCOUNT MANAGEMENT METHODS BEGIN HERE ***************  */
 	
-	
-	/* Account creation method */
 	/**
 	 * Creates a user account object with the provided information and returns that object to them.
 	 * <p>
@@ -216,8 +238,15 @@ public class AirlineManagerSingleton {
 		
 	}
 	
-	// Will has the user password with SHA-256 algorithm, which reportedly isn't super secure
-	// But we'll start with this
+
+	/**
+	 * Hashes the user password using the SHA-256 algorithm. 
+	 * 
+	 * 
+	 * @param rawPassword	Plain text user password
+	 * @return				Returns the hashed user password
+	 * @throws NoSuchAlgorithmException	
+	 */
 	private String hashPassword(String rawPassword) throws NoSuchAlgorithmException {
 		// Creates singleton for the hashing 
 		MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -235,15 +264,24 @@ public class AirlineManagerSingleton {
 		return hexString.toString();
 	}
 	
-	// Verifies whether the provided password matches the one in the user account
+	
+	/**
+	 * Verifies whether the provided password matches the one in the user account.
+	 * <p>
+	 * Hashes the provided plain text password and compares it to the hashed password in the user account. 
+	 * Returns the result of the comparison -- true or false.
+	 *  
+	 * @param givenPassword	Plain text password provided by the user
+	 * @param requestedAccount	The account whose password needs to be compared to
+	 * @return					The result of the password comparison -- true or false
+	 * @throws NoSuchAlgorithmException
+	 */
 	private boolean verifyPassword(String givenPassword, UserAccounts requestedAccount) throws NoSuchAlgorithmException {
 		String hashedInput = hashPassword(givenPassword);
 		return hashedInput.equals(requestedAccount.getPassword());	// This is not secure, password should PROBRABLY be private
 	}
 	
-	/* Method to log users in, will set login status to true if 
-	 * account credentials match
-	 */
+	
 	/**
 	 * Logs a user into their account after authenticating a provided username and password.
 	 * <p>
@@ -282,7 +320,7 @@ public class AirlineManagerSingleton {
 				return false;
 			}
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -332,6 +370,14 @@ public class AirlineManagerSingleton {
 	}
 	
 	/* Locates a user account by username*/
+	/**
+	 * Locates a user account by their username.
+	 * <p> Searches the master user account ArrayList for a username. Returns the UserAccounts 
+	 * object with a matching username, or null if no such account is found.
+	 * 
+	 * @param username	The username being searched for
+	 * @return			A UserAccounts object, or null
+	 */
 	private UserAccounts locateByUsername(String username) {
 		// Loop through accounts, find the one we're looking for
 		for(UserAccounts account : this.allAccounts) {
@@ -343,10 +389,8 @@ public class AirlineManagerSingleton {
 	}
 	
 	
-	/* Allows a user to view their account information */
 	/**
 	 * Prints relevant user account information.
-	 * 
 	 * 
 	 * @param username	The username of the requested account
 	 * @return			Returns true if the account was found and information printed
@@ -370,7 +414,7 @@ public class AirlineManagerSingleton {
 		
 	}
 	
-	/* User can view their flights */
+	
 	/**
 	 * Lists the booked flights of a user. 
 	 * 
@@ -393,9 +437,9 @@ public class AirlineManagerSingleton {
 		return true;
 	}
 	
-	// User can delete their accouont
+
 	/**
-	 * Deletes a user accuount by removing it from the account list.
+	 * Deletes a user account by removing it from the account list.
 	 * 
 	 * 
 	 * @param username	Username of account wanting to be deleted
@@ -423,6 +467,12 @@ public class AirlineManagerSingleton {
 		return true;
 	}
 	
+	/**
+	 * Prints all user accounts in the allAccounts ArrayList.
+	 * <p> 
+	 * Requires the admin password to be used. 
+	 * @param password	The administrative password
+	 */
 	public void printAccounts(String password) {
 		System.out.println(password.equals(adminPassword));
 		
@@ -439,6 +489,14 @@ public class AirlineManagerSingleton {
 		}
 	}
 	
+	/**
+	 * Updates a user password to a new password.
+	 * 
+	 * @param username		Username of account to update password for
+	 * @param password		Existing password for authentication of account
+	 * @param newPassword	New password for account
+	 * @return				Result of update -- success (true) or fail (false)
+	 */
 	public boolean changePassword(String username, String password, String newPassword)
 	{
 		for(UserAccounts acct : allAccounts)
@@ -465,6 +523,13 @@ public class AirlineManagerSingleton {
 		return true;
 	}
 	
+	/**
+	 * Updates an account membership level.
+	 * 	
+	 * @param username	Username of account to update
+	 * @param password	Password of account
+	 * @return			Result of update - true or false
+	 */
 	public boolean changeMembershipLevel(String username, String password)
 	{
 		return false;
@@ -476,7 +541,6 @@ public class AirlineManagerSingleton {
 	
 	/* *************** SEAT SELECTION METHOD ***************  */
 	
-	// Sets seat selection strategy 
 	/**
 	 * Changes the current seat selection strategy
 	 * 
@@ -490,6 +554,17 @@ public class AirlineManagerSingleton {
 	
 	
 	/* *************** FLIGHT METEHODS HERE ***************  */
+	/**
+	 * Cancels flight reservation.
+	 * <p>
+	 * Provided username and flight number will be used to cancel a reservation on a flight.
+	 * The account-selected seat will be set to available and the flight information removed 
+	 * from the user account.
+	 * 
+	 * @param flightNumber	Flight to cancel reservation on
+	 * @param username		Username of account canceling flight
+	 * @return				Success or failure of cancellation
+	 */
 	boolean cancelFlightReservation(int flightNumber, String username) {
 		// Get account
 		UserAccounts account = this.locateByUsername(username);
@@ -506,6 +581,17 @@ public class AirlineManagerSingleton {
 	}
 	
 	/* *************** BOOK FLIGHT METEHOD STARTS HERE ***************  */
+	/**
+	 * Reserves a seat on a specified flight.
+	 * <p>
+	 * Reserves a seat on a flight for a specified user. Utilizes
+	 * SeatSelectionStrategy to handle seat booking based on user
+	 * account level. 
+	 * 
+	 * @see SeatSelectionStrategy
+	 * @param account	Account to reserve a seat under
+	 * @return			Result of booking (true or false)
+	 */
 	public boolean bookFlight(UserAccounts account) 
 	{
 		Flight flight = viewPotentialFlights();
@@ -572,6 +658,11 @@ public class AirlineManagerSingleton {
 		return false;
 	}
 	/* *************** BOOK FLIGHT METEHOD ENDS HERE ***************  */
+	/**
+	 * Lists available flights for user to select from.
+	 * 
+	 * @return	The user's selected flight object.
+	 */
 	protected Flight viewPotentialFlights()
 	{	
 		Scanner scan = new Scanner(System.in);
@@ -588,6 +679,9 @@ public class AirlineManagerSingleton {
 		return allFlights.get(selectedFlight);
 	}
 	
+	/**
+	 * Lists all flights.
+	 */
 	public void viewAvailableFlights()
 	{
 		for(Flight flight : allFlights)
@@ -596,6 +690,11 @@ public class AirlineManagerSingleton {
 		}
 	}
 	
+	/**
+	 * Populates the master flight list iteratively.
+	 * 
+	 * @param count	The number of flights to add to the master flight list
+	 */
 	public void addFlightsToMasterList(int count)
 	{
 		for(int i = 0; i < count; i++)
@@ -604,6 +703,10 @@ public class AirlineManagerSingleton {
 		}
 	}
 	
+	/**
+	 * Lists seat information for a given flight
+	 * @param searchFlightNumber	The flight to list seats for
+	 */
 	public void viewPlaneSeats(int searchFlightNumber)
 	{
 		for(Flight flight : allFlights)
@@ -627,7 +730,13 @@ public class AirlineManagerSingleton {
 	}
 	
 	
-	
+	/**
+	 * Updates user membership level 
+	 * 
+	 * @param user	User account to update membership level
+	 * @param membership	New membership level for account	
+	 * @return				Whether account membership level was updated successfully or not
+	 */
 	public boolean changeMembershipLevel(UserAccounts user, AccountStatus membership) {
 		int points = user.getUserPoints();
 		if(points >= 1000 && membership == AccountStatus.EMERALD) {

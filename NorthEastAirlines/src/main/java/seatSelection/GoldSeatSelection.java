@@ -6,8 +6,19 @@ import java.util.Scanner;
 import accounts.AccountStatus;
 import edu.mu.NorthEastAirlines.Flight;
 
+/**
+ * Seat selection for Gold members.
+ * @see AccountStatus
+ */
 public class GoldSeatSelection implements SeatSelectionStrategy{
 
+	
+	/**
+	 * Lists all seats available at a certain membership level.
+	 * 
+	 * @param flight	Flight to be viewed
+	 * @return			An ArrayList of available seats
+	 */
 	@Override
 	public ArrayList<Seat> viewAvailableSeats(Flight flight) {
 		// TODO Auto-generated method stub
@@ -24,6 +35,21 @@ public class GoldSeatSelection implements SeatSelectionStrategy{
 		return availableSeats;
 	}
 
+	
+	/**
+	 * Allows the user to select a seat after being provided a list of seats available to them.
+	 * <p>
+	 * First calls viewAvailableSeats to display what seats the user can pick from.
+	 * Prompts the user to select a seat, sets marks that seat as unavailable, and returns
+	 * the seat number to the BookFlight method.
+	 * 
+	 * @see	viewAvailableSeats
+	 * 
+	 * 
+	 * @param flight		The flight being booked
+	 * @param accountLevel	The user account level
+	 * @return				The integer of the seat the user has selected
+	 */
 	@Override
 	public int selectSeat(Flight flight, AccountStatus accountLevel) {
 		try {
@@ -65,6 +91,13 @@ public class GoldSeatSelection implements SeatSelectionStrategy{
 		}
 	}
 	
+	
+	/**
+	 * Sets a seat availability to false.
+	 * 
+	 * @param flight	The flight object
+	 * @param index		The seat number
+	 */
 	@Override
 	public void changeAvailablityToFalse(Flight flight, int index) 
 	{

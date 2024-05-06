@@ -11,15 +11,17 @@ import edu.mu.NorthEastAirlines.Flight;
  * Contains the methods used within the different selection levels.
  */
 public interface SeatSelectionStrategy {
+	
+	
 	/**
 	 * Lists all seats available at a certain membership level.
 	 * 
 	 * @param flight	Flight to be viewed
 	 * @return			An ArrayList of available seats
 	 */
-	
-	
 	public ArrayList<Seat> viewAvailableSeats(Flight flight);
+	
+	
 	/**
 	 * Allows the user to select a seat after being provided a list of seats available to them.
 	 * <p>
@@ -28,7 +30,7 @@ public interface SeatSelectionStrategy {
 	 * the seat number to the BookFlight method.
 	 * 
 	 * @see	viewAvailableSeats
-	 * @see BookFlight
+	 * 
 	 * 
 	 * @param flight		The flight being booked
 	 * @param accountLevel	The user account level
