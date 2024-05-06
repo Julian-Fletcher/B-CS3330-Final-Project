@@ -1,19 +1,28 @@
 package edu.mu.NorthEastAirlines;
 
-import accounts.AccountStatus;
-import accounts.UserAccounts;
-import seatSelection.Seat;
-import seatSelection.SeatType;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
+
+
+
+import org.junit.jupiter.api.Test;
+
+import accounts.AccountStatus;
+import accounts.UserAccounts;
+import seatSelection.Seat;
+import seatSelection.SeatType;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
 public class SeatTest {
 
+	@Test
 	public void testSeatCreation() {
 		// Testing here
 		
@@ -23,6 +32,7 @@ public class SeatTest {
 		
 	}
 	
+	@Test
 	public void testSeatAvailability() {
 		Seat seat = new Seat(24, SeatType.COMFORT);
 		

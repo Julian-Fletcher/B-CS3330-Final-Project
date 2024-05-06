@@ -1,6 +1,7 @@
 package edu.mu.NorthEastAirlines;
 
 import accounts.AccountStatus;
+
 import accounts.UserAccounts;
 import flights.PlanePsuedoFactory;
 import flights.PlaneType;
@@ -13,6 +14,21 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
+
+
+
+import org.junit.jupiter.api.Test;
+
+import accounts.AccountStatus;
+import accounts.UserAccounts;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
+
+
 
 public class PlaneObjectTest {
 	
@@ -26,6 +42,7 @@ public class PlaneObjectTest {
 		
 		assertSame(instance1, instance2,"Instances should be the same");
 	}
+	
 	
 	
 	
