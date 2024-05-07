@@ -1,5 +1,6 @@
 package accounts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.mu.NorthEastAirlines.Flight;
@@ -16,7 +17,7 @@ public class UserAccounts
 	private AccountStatus membershipLevel;
 	private String firstName;
 	private String lastName;
-	private List<UserFlightData> bookedFlights;
+	private List<UserFlightData> bookedFlights = new ArrayList<UserFlightData>();
 	private boolean isLoggedIn;
 	private int points;
 	
@@ -192,5 +193,9 @@ public class UserAccounts
 	public boolean setLoginStatus(boolean value) {
 		this.isLoggedIn = value;
 		return true;	// Returns true always cause it should never fail!!
+	}
+	
+	public boolean addBookedFlight(UserFlightData flight) {
+		return this.bookedFlights.add(flight);
 	}
 }

@@ -37,7 +37,7 @@ import seatSelection.SeatType;
  */
 public class AirlineManagerSingleton {
 	
-	private String adminPassword;
+	private String adminPassword = "adminPassword";
 	private ArrayList<UserAccounts> allAccounts = new ArrayList<>();
 	private ArrayList<Flight> allFlights = new ArrayList<>();
 	private boolean isAdminLoggedIn;	// Check if admin account logged in
@@ -432,7 +432,7 @@ public class AirlineManagerSingleton {
 		// Print the users booked flights
 		ArrayList<UserFlightData> flights = (ArrayList<UserFlightData>)account.getBookedFlights();
 		for(UserFlightData flight : flights) {
-			System.out.println("Flight: " + flight.getFlight() + " Seat: " +  flight.getSeat());
+			System.out.println("Flight: " + flight.getFlight() + " Seat: " +  flight.getSeat() + " Seat Type: " + flight.getSeatType());
 		}
 		return true;
 	}
@@ -455,15 +455,20 @@ public class AirlineManagerSingleton {
 		}
 		
 		// Log into account
-		boolean logIn = this.login(username, password);
-		
-		if(logIn == false) {
-			return false;
+		if(requestedAccount.getLoginStatus() == false) {
+			boolean logIn = this.login(username, password);
+			
+			if(logIn == false) {
+				return false;
+			}
 		}
+		
+
 		
 		// Remove the account from the account list
 		this.allAccounts.remove(requestedAccount);
 		this.updateAccountIndex(2); // decrement account index
+		System.out.println("Account successfully deleted.");
 		return true;
 	}
 	
@@ -666,9 +671,7 @@ public class AirlineManagerSingleton {
 			System.out.println("First Class: " + newSeat + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 200);
 			UserFlightData flightData = new UserFlightData(flight.flightNumber, newSeat, SeatType.FIRST_CLASS);
-			ArrayList<UserFlightData> userDataList = new ArrayList<UserFlightData>();
-			userDataList.add(flightData);
-			account.setBookedFlights(userDataList);
+			account.addBookedFlight(flightData);
 			System.out.println("Updated points: " + account.getUserPoints() + " points");
 			return true;
 		}
@@ -686,9 +689,7 @@ public class AirlineManagerSingleton {
 			System.out.println("Comfort Class: " + newSeat + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 100);
 			UserFlightData flightData = new UserFlightData(flight.flightNumber, newSeat, SeatType.COMFORT);
-			ArrayList<UserFlightData> userDataList = new ArrayList<UserFlightData>();
-			userDataList.add(flightData);
-			account.setBookedFlights(userDataList);
+			account.addBookedFlight(flightData);
 			System.out.println("Updated points: " + account.getUserPoints() + " points");
 			return true;
 		}
@@ -706,9 +707,7 @@ public class AirlineManagerSingleton {
 			System.out.println("Economy Class: " + newSeat + " is now reserved!!!");
 			account.setUserPoints(account.getUserPoints() + 50);
 			UserFlightData flightData = new UserFlightData(flight.flightNumber, newSeat, SeatType.ECONOMY);
-			ArrayList<UserFlightData> userDataList = new ArrayList<UserFlightData>();
-			userDataList.add(flightData);
-			account.setBookedFlights(userDataList);
+			account.addBookedFlight(flightData);
 			System.out.println("Updated points: " + account.getUserPoints() + " points");
 			return true;
 		}
@@ -805,15 +804,15 @@ public class AirlineManagerSingleton {
 	 */
 	public boolean changeMembershipLevel(UserAccounts user, AccountStatus membership) {
 		int points = user.getUserPoints();
-		if(points >= 1000 && membership == AccountStatus.EMERALD) {
+		if(points >= 800 && membership == AccountStatus.EMERALD) {
 			user.setMembershipLevel(AccountStatus.EMERALD);
-			user.setUserPoints(points-1000);
+			user.setUserPoints(points-800);
 			return true;
-		}else if(points >= 500 && membership == AccountStatus.GOLD) {
+		}else if(points >= 200 && membership == AccountStatus.GOLD) {
 			user.setMembershipLevel(AccountStatus.GOLD);
-			user.setUserPoints(points-500);
+			user.setUserPoints(points-200);
 			return true;
-		} else if (points <= 500 && membership == AccountStatus.IRON){
+		} else if (points < 200 && membership == AccountStatus.IRON){
 			user.setMembershipLevel(AccountStatus.IRON);
 			user.setUserPoints(points);
 			return true;
